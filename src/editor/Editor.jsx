@@ -17,8 +17,11 @@ const ToggleBtn = styled.button`
     right: 0px;
 `;
 
+const TestBtn = styled.button`
+`
+
 const Editor = () => {
-    const [isHidden, setIsHidden] = useState(true);
+    const [isHidden, setIsHidden] = useState(false);
 
     return (
         <Wrapper hidden={isHidden}>
@@ -26,6 +29,7 @@ const Editor = () => {
                 <ToggleBtn onClick={() => setIsHidden(!isHidden)}>
                     {isHidden ? 'Editor' : 'Hide'}
                 </ToggleBtn>
+                <TestBtn onClick={() => console.log("click")}>Hello World</TestBtn>
             </EditorBar>
             <App />
         </Wrapper>
