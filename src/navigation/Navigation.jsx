@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
+import gsap from 'gsap'
+import { useDispatch, useSelector } from 'react-redux';
+import { setCurrentScreen } from '../store/reducers/navigation'
 
 const UNSET = 0;
 const CENTRE = 1;
@@ -12,56 +15,74 @@ const Slider = styled.div({
 const Screen = styled.div`
     position: relative;
     height: 100%;
-    display: grid;
-    align-content: center;
-    background-color: aquamarine;
-    left: ${props => {
-        switch (props.position) {
-            case LEFT:
-                return "-100%"
-            case RIGHT:
-                return "100%"
-            case CENTRE:
-                return "0%"
-            default:
-                return "";
-        }
-    }};
-    transition: left 0.5s ease;
     will-change: left;
-
     &.second {
+        left: 100%;
         top: -100%;
-        background-color: lightblue;
     }
+    
+    background-color: sandybrown;
+    align-content: center;
+    text-align: center;
+    display: grid;
 `;
 
-const Navigation = () => {
-    const [screenPos, setScreenPos] = useState({screen1: CENTRE, screen2: RIGHT});
 
-    const goNext = () => {
-        if (screenPos.screen1 === CENTRE) {
-            if(screenPos.screen2 === RIGHT){
-                setScreenPos({screen1: LEFT, screen2: CENTRE});
-            }
-        } 
-        // screen2 is centre    
-        else if(screenPos.screen1 === RIGHT){
-            setScreenPos({screen1: CENTRE, screen2: LEFT});
-        }
+const animationSpeed = 0.3;
+let isScreen1 = true;
+let screenDisplayed = "";
+
+const Navigation = () => {
+    const screen1 = useRef();
+    const screen2 = useRef();
+    const [screen1Content, updateScreen1] = useState(<></>);
+    const [screen2Content, updateScreen2] = useState(<></>);
+    const dispatch = useDispatch();
+
+    const rightToLeft = () => {
+        gsap.fromTo(screen1.current, {left: isScreen1 ? "0%": "100%"}, {left: isScreen1 ? "-100%" : "0%", duration: animationSpeed});
+        gsap.fromTo(screen2.current, {left: isScreen1 ? "100%" : "0%"}, {left: isScreen1 ? "0%" : "-100%", duration: animationSpeed});
     }
-    const goBack = () => {
-        // setScreenPos({screen1: "CENTRE", screen2: "right"});
+    const leftToRight = () => {
+        gsap.fromTo(screen1.current, {left: isScreen1 ? "0%" : "-100%"}, {left: isScreen1 ? "100%" : "0%", duration: animationSpeed});
+        gsap.fromTo(screen2.current, {left: isScreen1 ? "-100%" : "0%"}, {left: isScreen1 ? "0%" : "100%", duration: animationSpeed});
+    }
+
+    // listening for 'current_screen' to be updated
+    useSelector(state => {
+        const screen = state.navigation.current_screen;
+        const animationDirection = state.navigation.transition_direction;
+        if (screen !== screenDisplayed){
+            const updateScreen = 
+                !isScreen1 && animationDirection.length || 
+                isScreen1 && !animationDirection.length ?
+                updateScreen1 :
+                updateScreen2;
+                
+            updateScreen(<div>{screen}</div>);
+
+            if(animationDirection === "rtl"){
+                rightToLeft();
+                isScreen1 = !isScreen1;
+            } else if (animationDirection === "ltr"){
+                leftToRight();
+                isScreen1 = !isScreen1;
+            }
+        }
+        screenDisplayed = screen;
+        return screen;
+    });
+
+    if(screenDisplayed === "") {
+        dispatch(setCurrentScreen({current_screen: "screen_0"}));
     }
 
     return (<Slider>
-        <Screen position={screenPos.screen1}>
-            <button onClick={goNext}>goNext</button>
-            <button onClick={goBack}>goBack</button>
+        <Screen ref={screen1}>
+            {screen1Content}
         </Screen>
-        <Screen position={screenPos.screen2} className="second">
-            <button onClick={goNext}>goNext</button>
-            <button onClick={goBack}>goBack</button>
+        <Screen ref={screen2} className="second">
+            {screen2Content}
         </Screen>
     </Slider>);
 };

@@ -1,6 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
-const settings = require('./settings');
+const settings = require('./build-settings');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = (env) => {
@@ -31,10 +31,13 @@ module.exports = (env) => {
             new HtmlWebpackPlugin({
                 template: path.resolve(__dirname, 'src', 'index.html'),
             }),
+            // new webpack.DefinePlugin({
+            //     __REACT_DEVTOOLS_GLOBAL_HOOK__: '({ isDisabled: true })',
+            // }),
         ],
         performance: {
             hints: false,
         },
-        devtool: settings.buildMode === 'development' && 'source-map',
+        devtool: 'source-map',
     };
 };
