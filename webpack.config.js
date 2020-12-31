@@ -11,7 +11,9 @@ module.exports = (env) => {
             boomslang: path.resolve(
                 __dirname,
                 'src',
-                settings.editor ? 'editor/index.js' : 'index.js'
+                settings.editor && settings.buildMode !== 'production'
+                    ? 'editor/index.js'
+                    : 'index.js'
             ),
         },
         module: {
@@ -31,10 +33,16 @@ module.exports = (env) => {
             new HtmlWebpackPlugin({
                 template: path.resolve(__dirname, 'src', 'index.html'),
             }),
-            // new webpack.DefinePlugin({
-            //     __REACT_DEVTOOLS_GLOBAL_HOOK__: '({ isDisabled: true })',
-            // }),
-        ],
+        ].concat(
+            settings.buildMode === 'production'
+                ? [
+                      new webpack.DefinePlugin({
+                          __REACT_DEVTOOLS_GLOBAL_HOOK__:
+                              '({ isDisabled: true })',
+                      }),
+                  ]
+                : []
+        ),
         performance: {
             hints: false,
         },

@@ -1,4 +1,4 @@
 module.exports = {
-    buildMode: 'production',
+    buildMode: 'development',
     editor: true,
 };

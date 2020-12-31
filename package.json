@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack --mode development",
-    "start": "webpack serve --progress",
+    "watch": "webpack serve --progress",
+    "editor": "node server/index.js",
     "build": "webpack --mode production"
   },
   "author": "",
@@ -34,6 +35,7 @@
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "reselect": "^4.0.0",
-    "styled-components": "^5.2.1"
+    "styled-components": "^5.2.1",
+    "websocket-heartbeat-js": "^1.0.12"
   }
 }

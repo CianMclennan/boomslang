@@ -17,8 +17,8 @@ const ToggleBtn = styled.button`
     right: 0px;
 `;
 
-const Editor = () => {
-    const [isHidden, setIsHidden] = useState(false);
+const Editor = (props) => {
+    const [isHidden, setIsHidden] = useState(true);
 
     return (
         <Wrapper hidden={isHidden}>

@@ -1,36 +1,31 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import gsap from 'gsap'
 import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentScreen } from '../store/reducers/navigation'
 
-const UNSET = 0;
-const CENTRE = 1;
-const RIGHT = 2;
-const LEFT = 3;
-
-const Slider = styled.div({
-    height: "100%",
-});
-const Screen = styled.div`
+const Slider = styled.div`
+    height: 100%;
+    overflow: hidden;
+    background-color: sandybrown;
+`;
+const Screen = styled.main`
     position: relative;
     height: 100%;
     will-change: left;
+    overflow: auto;
+
     &.second {
         left: 100%;
         top: -100%;
     }
-    
-    background-color: sandybrown;
-    align-content: center;
-    text-align: center;
-    display: grid;
 `;
 
-
-const animationSpeed = 0.3;
+let animationSpeed = 0;
 let isScreen1 = true;
 let screenDisplayed = "";
+let shouldAnimate = false;
+let animationDirection = "";
 
 const Navigation = () => {
     const screen1 = useRef();
@@ -51,16 +46,29 @@ const Navigation = () => {
     // listening for 'current_screen' to be updated
     useSelector(state => {
         const screen = state.navigation.current_screen;
-        const animationDirection = state.navigation.transition_direction;
-        if (screen !== screenDisplayed){
-            const updateScreen = 
-                !isScreen1 && animationDirection.length || 
-                isScreen1 && !animationDirection.length ?
-                updateScreen1 :
-                updateScreen2;
-                
-            updateScreen(<div>{screen}</div>);
+        if (screen === screenDisplayed) return;
+        
+        screenDisplayed = screen;
+        animationSpeed = state.settings.screen_transition_speed || 0;
+        animationDirection = state.navigation.transition_direction;
+        shouldAnimate =  state.settings.screen_transition && animationSpeed > 0 && animationDirection.length;
+        
+        let updateScreen = () => {throw new Error("'updateScreen' is unset.")};
+        if (isScreen1) {
+            updateScreen = shouldAnimate ? updateScreen2 : updateScreen1;
+        } else {
+            updateScreen = shouldAnimate ? updateScreen1 : updateScreen2;
+        }
 
+        updateScreen(<div>{screen}</div>);
+        return screen;
+    });
+
+    // first load.
+    useEffect(() => dispatch(setCurrentScreen({current_screen: "screen_0"})), []);
+    
+    useEffect(() => {
+        if (shouldAnimate) {
             if(animationDirection === "rtl"){
                 rightToLeft();
                 isScreen1 = !isScreen1;
@@ -68,23 +76,20 @@ const Navigation = () => {
                 leftToRight();
                 isScreen1 = !isScreen1;
             }
+            shouldAnimate = false;
         }
-        screenDisplayed = screen;
-        return screen;
     });
 
-    if(screenDisplayed === "") {
-        dispatch(setCurrentScreen({current_screen: "screen_0"}));
-    }
-
-    return (<Slider>
-        <Screen ref={screen1}>
+    return (
+    <Slider>
+        <Screen ref={screen1} aria-hidden={!isScreen1}>
             {screen1Content}
         </Screen>
-        <Screen ref={screen2} className="second">
+        <Screen ref={screen2} aria-hidden={isScreen1} className="second">
             {screen2Content}
         </Screen>
-    </Slider>);
+    </Slider>
+    );
 };
 
 export default Navigation;
