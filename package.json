@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack --mode development",
-    "watch": "webpack serve --progress",
+    "dev": "webpack --config webpack.dev.js",
+    "watch": "webpack serve --progress --config webpack.dev.js",
     "editor": "node server/index.js",
-    "build": "webpack --mode production"
+    "build": "webpack --config webpack.prod.js"
   },
   "author": "",
   "license": "ISC",

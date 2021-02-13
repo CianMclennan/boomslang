@@ -1,13 +1,13 @@
 import React, { useRef, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import gsap from 'gsap'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector, useStore } from 'react-redux';
 import { setCurrentScreen } from '../store/reducers/navigation'
+import screens from '../screens/screens';
 
 const Slider = styled.div`
     height: 100%;
     overflow: hidden;
-    background-color: sandybrown;
 `;
 const Screen = styled.main`
     position: relative;
@@ -45,12 +45,12 @@ const Navigation = () => {
 
     // listening for 'current_screen' to be updated
     useSelector(state => {
-        const screen = state.navigation.current_screen;
-        if (screen === screenDisplayed) return;
+        const screenID = state.navigation.current_screen;
+        if (screenID === screenDisplayed) return;
         
-        screenDisplayed = screen;
+        screenDisplayed = screenID;
         animationSpeed = state.settings.screen_transition_speed || 0;
-        animationDirection = state.navigation.transition_direction;
+        animationDirection = state.navigation.transition_direction || "";
         shouldAnimate =  state.settings.screen_transition && animationSpeed > 0 && animationDirection.length;
         
         let updateScreen = () => {throw new Error("'updateScreen' is unset.")};
@@ -60,12 +60,14 @@ const Navigation = () => {
             updateScreen = shouldAnimate ? updateScreen1 : updateScreen2;
         }
 
-        updateScreen(<div>{screen}</div>);
-        return screen;
+        updateScreen(screens[screenID]);
     });
 
     // first load.
-    useEffect(() => dispatch(setCurrentScreen({current_screen: "screen_0"})), []);
+    const state = useStore().getState();
+    useEffect(() => {
+        dispatch(setCurrentScreen({screen: state.navigation.screens[0].name}))
+    }, []);
     
     useEffect(() => {
         if (shouldAnimate) {

@@ -1,5 +1,5 @@
 export default {
-    course_ID: 'c_1',
+    course_ID: 'course_1',
     title: 'Boomslang',
     screen_transition: true,
     screen_transition_speed: 0.3,

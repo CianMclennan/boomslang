@@ -21,14 +21,14 @@ const Footer = () => {
 
     const goBackward = () => {
         dispatch(setCurrentScreen({
-            current_screen: `screen_${--currentScreen}`,
-            transition_direction: "ltr"
+            screen: `screen_${--currentScreen}`,
+            direction: "ltr"
         }));
     }
     const goForward = () => {
         dispatch(setCurrentScreen({
-            current_screen: `screen_${++currentScreen}`,
-            transition_direction: "rtl"
+            screen: `screen_${++currentScreen}`,
+            direction: "rtl"
         }));
     }
     return ( 
