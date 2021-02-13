@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
 import configureStore from '../store/configureStore';
-import { screenAdded } from '../store/reducers/navigation';
+import { screenAdded, currentScreenSet } from '../store/reducers/navigation';
 
 import structure from '../structure';
 
@@ -12,8 +12,15 @@ import Editor from './Editor.jsx';
 
 const store = configureStore();
 structure.map((screen) => store.dispatch(screenAdded({ name: screen })));
-const settings = store.getState().settings;
-const { course_ID, title, editor_url } = settings;
+const {
+    course_ID,
+    title,
+    editor_url,
+    start_screen,
+} = store.getState().settings;
+
+store.dispatch(currentScreenSet({ screen: start_screen }));
+
 document.title = title;
 
 // const connection = editorConnection(editor_url, course_ID);

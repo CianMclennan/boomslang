@@ -1,8 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import gsap from 'gsap'
-import { useDispatch, useSelector, useStore } from 'react-redux';
-import { setCurrentScreen } from '../store/reducers/navigation'
+import { useSelector } from 'react-redux';
 import screens from '../screens/screens';
 
 const Slider = styled.div`
@@ -32,7 +31,6 @@ const Navigation = () => {
     const screen2 = useRef();
     const [screen1Content, updateScreen1] = useState(<></>);
     const [screen2Content, updateScreen2] = useState(<></>);
-    const dispatch = useDispatch();
 
     const rightToLeft = () => {
         gsap.fromTo(screen1.current, {left: isScreen1 ? "0%": "100%"}, {left: isScreen1 ? "-100%" : "0%", duration: animationSpeed});
@@ -46,7 +44,7 @@ const Navigation = () => {
     // listening for 'current_screen' to be updated
     useSelector(state => {
         const screenID = state.navigation.current_screen;
-        if (screenID === screenDisplayed) return;
+        if (!screenID || screenID === screenDisplayed) return;
         
         screenDisplayed = screenID;
         animationSpeed = state.settings.screen_transition_speed || 0;
@@ -62,12 +60,6 @@ const Navigation = () => {
 
         updateScreen(screens[screenID]);
     });
-
-    // first load.
-    const state = useStore().getState();
-    useEffect(() => {
-        dispatch(setCurrentScreen({screen: state.navigation.screens[0].name}))
-    }, []);
     
     useEffect(() => {
         if (shouldAnimate) {
