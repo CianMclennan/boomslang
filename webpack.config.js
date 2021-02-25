@@ -30,5 +30,11 @@ module.exports = (env) => {
                 template: path.resolve(__dirname, 'src', 'index.html'),
             }),
         ],
+        resolve: {
+            alias: {
+                src: path.resolve(__dirname, 'src'),
+            },
+            extensions: ['.jsx', '.js'],
+        },
     };
 };

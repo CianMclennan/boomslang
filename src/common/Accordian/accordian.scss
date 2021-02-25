@@ -1,0 +1,18 @@
+.accordian {
+    min-height: 100px;
+
+    &__header {
+        background-color: sandybrown;
+        padding: 5px;
+        font-size: 1.2em;
+    }
+
+    &__content {
+        background-color: pink;
+        min-height: 200px;
+
+        &--hidden {
+            display: none;
+        }
+    }
+}

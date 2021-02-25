@@ -1,89 +1,22 @@
-import React, { useRef, useState, useEffect } from 'react';
-import styled from 'styled-components';
-import gsap from 'gsap'
-import { useSelector } from 'react-redux';
-import screens from '../screens/screens';
-
-const Slider = styled.div`
-    height: 100%;
-    overflow: hidden;
-`;
-const Screen = styled.main`
-    position: relative;
-    height: 100%;
-    will-change: left;
-    overflow: auto;
-
-    &.second {
-        left: 100%;
-        top: -100%;
-    }
-`;
-
-let animationSpeed = 0;
-let isScreen1 = true;
-let screenDisplayed = "";
-let shouldAnimate = false;
-let animationDirection = "";
+import React, { useState } from 'react';
+import Main from './components/Main.jsx';
+import Footer from './components/Footer.jsx'
+import './navigation.scss'
 
 const Navigation = () => {
-    const screen1 = useRef();
-    const screen2 = useRef();
-    const [screen1Content, updateScreen1] = useState(<></>);
-    const [screen2Content, updateScreen2] = useState(<></>);
+    const [header, showHeader] = useState(true);
+    const [footer, showFooter] = useState(true);
 
-    const rightToLeft = () => {
-        gsap.fromTo(screen1.current, {left: isScreen1 ? "0%": "100%"}, {left: isScreen1 ? "-100%" : "0%", duration: animationSpeed});
-        gsap.fromTo(screen2.current, {left: isScreen1 ? "100%" : "0%"}, {left: isScreen1 ? "0%" : "-100%", duration: animationSpeed});
-    }
-    const leftToRight = () => {
-        gsap.fromTo(screen1.current, {left: isScreen1 ? "0%" : "-100%"}, {left: isScreen1 ? "100%" : "0%", duration: animationSpeed});
-        gsap.fromTo(screen2.current, {left: isScreen1 ? "-100%" : "0%"}, {left: isScreen1 ? "0%" : "100%", duration: animationSpeed});
+    const inlineStyle = {
+        gridTemplateRows: `${header && '80px'} 1fr ${footer && '80px'}`,
     }
 
-    // listening for 'current_screen' to be updated
-    useSelector(state => {
-        const screenID = state.navigation.current_screen;
-        if (!screenID || screenID === screenDisplayed) return;
-        
-        screenDisplayed = screenID;
-        animationSpeed = state.settings.screen_transition_speed || 0;
-        animationDirection = state.navigation.transition_direction || "";
-        shouldAnimate =  state.settings.screen_transition && animationSpeed > 0 && animationDirection.length;
-        
-        let updateScreen = () => {throw new Error("'updateScreen' is unset.")};
-        if (isScreen1) {
-            updateScreen = shouldAnimate ? updateScreen2 : updateScreen1;
-        } else {
-            updateScreen = shouldAnimate ? updateScreen1 : updateScreen2;
-        }
-
-        updateScreen(screens[screenID]);
-    });
-    
-    useEffect(() => {
-        if (shouldAnimate) {
-            if(animationDirection === "rtl"){
-                rightToLeft();
-                isScreen1 = !isScreen1;
-            } else if (animationDirection === "ltr"){
-                leftToRight();
-                isScreen1 = !isScreen1;
-            }
-            shouldAnimate = false;
-        }
-    });
-
-    return (
-    <Slider>
-        <Screen ref={screen1} aria-hidden={!isScreen1}>
-            {screen1Content}
-        </Screen>
-        <Screen ref={screen2} aria-hidden={isScreen1} className="second">
-            {screen2Content}
-        </Screen>
-    </Slider>
-    );
+    return ( 
+        <div className="navigation" style={inlineStyle}>
+            {header && <header className="navigation__header" />}
+            <Main />
+            {footer && <Footer/>}
+        </div>
+    )
 };
-
 export default Navigation;

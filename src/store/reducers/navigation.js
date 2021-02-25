@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { NavigationRules } from '../../structure.js';
+import { NavigationRules } from 'src/structure.js';
 
 const slice = createSlice({
     name: 'navigation',
