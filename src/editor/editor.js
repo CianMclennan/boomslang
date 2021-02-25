@@ -11,7 +11,7 @@ import {
 import structure from 'src/structure.js';
 
 import Editor from './Editor.jsx';
-// import editorConnection from './editor_connect';
+// import editorConnection from './editor_connect.js';
 
 const store = configureStore();
 structure.map((screen) => store.dispatch(screenAdded({ name: screen })));

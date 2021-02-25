@@ -1,5 +1,4 @@
 const path = require('path');
-const webpack = require('webpack');
 const settings = require('./build-settings');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 

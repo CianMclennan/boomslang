@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ACCORDIAN, HEADER, CONTENT, CONTENT_HIDDEN } from './constants.js'
 import './accordian.scss'
 
-export default (props) => {
+const Accordian = (props) => {
     const [selected, setSelected] = useState(0);    
 
     const handleHeaderClick = (index) => {
@@ -25,3 +25,5 @@ export default (props) => {
         {content}
     </div>
 }
+
+export default Accordian;
