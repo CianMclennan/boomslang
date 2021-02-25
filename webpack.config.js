@@ -9,7 +9,7 @@ module.exports = (env) => {
             boomslang: path.resolve(
                 __dirname,
                 'src',
-                settings.editor ? 'editor/index.js' : 'index.js'
+                settings.editor ? 'editor/editor.js' : 'index.js'
             ),
         },
         module: {

@@ -1,4 +1,4 @@
-import settings from '../../settings';
+import settings from 'src/settings.js';
 
 import { createSlice } from '@reduxjs/toolkit';
 

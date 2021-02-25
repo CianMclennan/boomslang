@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import gsap from 'gsap'
 import { useSelector } from 'react-redux';
-import screens from 'src/screens/screens';
+import screens from 'src/screens/screens.js';
 
 let animationSpeed = 0;
 let isScreen1 = true;

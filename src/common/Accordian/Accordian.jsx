@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ACCORDIAN, HEADER, CONTENT, CONTENT_HIDDEN } from './constants'
+import { ACCORDIAN, HEADER, CONTENT, CONTENT_HIDDEN } from './constants.js'
 import './accordian.scss'
 
 export default (props) => {

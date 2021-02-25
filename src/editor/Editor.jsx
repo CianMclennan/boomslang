@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import App from '../App.jsx';
+import App from 'src/App.jsx';
 import './editor.scss';
 
 const Editor = (props) => {
