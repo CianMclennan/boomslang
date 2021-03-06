@@ -6,8 +6,9 @@
   "scripts": {
     "dev": "webpack --config webpack.dev.js",
     "watch": "webpack serve --progress --config webpack.dev.js",
-    "server": "node server/index.js",
-    "build": "webpack --config webpack.prod.js"
+    "server": "node -r esm server/index.js",
+    "build": "webpack --config webpack.prod.js",
+    "test": "jest"
   },
   "author": "",
   "license": "ISC",
@@ -19,6 +20,7 @@
     "css-loader": "^5.0.2",
     "dotenv": "^8.2.0",
     "html-webpack-plugin": "^4.5.0",
+    "jest": "^26.6.3",
     "sass": "^1.32.8",
     "sass-loader": "^10.1.1",
     "style-loader": "^2.0.0",
@@ -28,7 +30,11 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.5.0",
+    "esm": "^3.2.25",
     "gsap": "^3.5.1",
+    "lodash": "^4.17.21",
+    "mongodb": "^3.6.4",
+    "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-redux": "^7.2.2",

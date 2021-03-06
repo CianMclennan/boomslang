@@ -1,6 +1,5 @@
 import React from 'react';
-import Accordian from 'src/common/Accordian/Accordian.jsx'
+import parse from 'src/parser/parser.js';
+import data from '../../parser/__mock__/mockData.js';
 
-export default () => {
-    return <>screen_3</>;
-}
+export default () => parse(data);

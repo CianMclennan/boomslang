@@ -1,11 +1,29 @@
-const express = require('express');
+import fs from 'fs';
+import path from 'path';
+import ws from 'express-ws';
+import express from 'express';
+import { MongoClient } from 'mongodb';
+
 const app = express();
-const ws = require('express-ws');
-const path = require('path');
-const fs = require('fs');
 const port = 3001;
 
+const dbURL = 'mongodb://localhost:27017';
+const dbName = 'boomslang';
 ws(app);
+
+MongoClient.connect(dbURL, function (err, client) {
+    console.log('Connected successfully to server');
+
+    const db = client.db(dbName);
+
+    const collection = db.collection('screens');
+    collection.insertOne({
+        title: 'test',
+        body: 'wowo',
+        poop: 0999,
+    });
+    client.close();
+});
 
 let serveStatic = false;
 const staticFiles = path.join(__dirname, '../dist');

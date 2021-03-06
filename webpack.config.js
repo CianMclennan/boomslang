@@ -1,6 +1,7 @@
 const path = require('path');
 const settings = require('./build-settings');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const test = require('./builder/builder');
 
 module.exports = (env) => {
     return {
