@@ -34,5 +34,26 @@
             "error",
             "always"
         ]
-    }
+    },
+    "overrides": [{
+        "files": [ "*.spec.js" ],
+        "rules": {
+            "no-undef": 0
+        }
+    },
+    {
+        "files": [ "webpack.*.js", "styleMock.js", "fileMock.js", "build-settings.js", "jest.config.js" ],
+        "env": {
+            "node": true
+        },
+        "parserOptions": {
+            "sourceType": "script"
+        }
+    },
+    {
+        "files": [ "server/**" ],
+        "env": {
+            "node": true
+        }
+    }]
 }

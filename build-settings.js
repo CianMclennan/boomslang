@@ -1,3 +1,3 @@
 module.exports = {
-    editor: true,
+	editor: true,
 };

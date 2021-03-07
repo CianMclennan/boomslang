@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import fs from 'fs';
 import path from 'path';
 import ws from 'express-ws';
@@ -12,40 +13,40 @@ const dbName = 'boomslang';
 ws(app);
 
 MongoClient.connect(dbURL, function (err, client) {
-    console.log('Connected successfully to server');
+	console.log('Connected successfully to server');
 
-    const db = client.db(dbName);
+	const db = client.db(dbName);
 
-    const collection = db.collection('screens');
-    collection.insertOne({
-        title: 'test',
-        body: 'wowo',
-        poop: 0999,
-    });
-    client.close();
+	const collection = db.collection('screens');
+	collection.insertOne({
+		title: 'test',
+		body: 'wowo',
+		poop: 999,
+	});
+	client.close();
 });
 
 let serveStatic = false;
 const staticFiles = path.join(__dirname, '../dist');
 if (fs.existsSync(staticFiles)) {
-    app.use(express.static(staticFiles));
-    serveStatic = true;
+	app.use(express.static(staticFiles));
+	serveStatic = true;
 }
 
 app.get('/', (req, res) => {
-    if (serveStatic) {
-        res.sendFile('index.html');
-    }
-    res.send('Boomslang Server');
+	if (serveStatic) {
+		res.sendFile('index.html');
+	}
+	res.send('Boomslang Server');
 });
 
 app.ws('/', (socket, req) => {
-    socket.on('message', function (msg) {
-        if (msg === 'heartbeat') {
-            return socket.send(msg);
-        }
-        console.log(JSON.parse(msg));
-    });
+	socket.on('message', function (msg) {
+		if (msg === 'heartbeat') {
+			return socket.send(msg);
+		}
+		console.log(JSON.parse(msg));
+	});
 });
 
 app.listen(port, () => console.log(`listening on port ${port}`));
