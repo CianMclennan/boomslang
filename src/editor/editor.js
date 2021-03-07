@@ -4,8 +4,8 @@ import { Provider } from 'react-redux';
 
 import configureStore from 'src/store/configureStore.js';
 import {
-    screenAdded,
-    currentScreenSet,
+	screenAdded,
+	currentScreenSet,
 } from 'src/store/reducers/navigation.js';
 
 import structure from 'src/structure.js';
@@ -16,10 +16,10 @@ import Editor from './Editor.jsx';
 const store = configureStore();
 structure.map((screen) => store.dispatch(screenAdded({ name: screen })));
 const {
-    course_ID,
-    title,
-    editor_url,
-    start_screen,
+	// course_ID,
+	title,
+	// editor_url,
+	start_screen,
 } = store.getState().settings;
 
 store.dispatch(currentScreenSet({ screen: start_screen }));
@@ -30,8 +30,8 @@ document.title = title;
 // window.ws = connection;
 
 ReactDOM.render(
-    <Provider store={store}>
-        <Editor />
-    </Provider>,
-    document.getElementById('root')
+	<Provider store={store}>
+		<Editor />
+	</Provider>,
+	document.getElementById('root')
 );

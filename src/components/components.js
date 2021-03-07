@@ -5,8 +5,8 @@ const Text = React.lazy(() => import('./Text/Text.jsx'));
 const Layout = React.lazy(() => import('./Layout/Layout.jsx'));
 
 export default {
-    Accordian,
-    ThreeLayout,
-    Text,
-    Layout,
+	Accordian,
+	ThreeLayout,
+	Text,
+	Layout,
 };

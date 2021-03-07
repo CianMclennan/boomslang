@@ -1,13 +1,16 @@
 import React from 'react';
-import parse from 'src/parser/parser.js'
+import PropTypes from 'prop-types';
+import parse from 'src/parser/parser.js';
 
 const Layout = ({child, style}) => {
-    if (!child) {
-        throw new Error("child does not exist in Layout component");
-    }
-    return <div style={style}>
-        {parse(child)}
-    </div>;
-}
+	return <div style={style}>
+		{parse(child)}
+	</div>;
+};
+
+Layout.propTypes = {
+	child: PropTypes.any.isRequired,
+	style: PropTypes.any,
+};
 
 export default Layout;
