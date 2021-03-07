@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import fs from 'fs';
 import path from 'path';
 import ws from 'express-ws';
@@ -40,7 +39,7 @@ app.get('/', (req, res) => {
 	res.send('Boomslang Server');
 });
 
-app.ws('/', (socket, req) => {
+app.ws('/', (socket) => {
 	socket.on('message', function (msg) {
 		if (msg === 'heartbeat') {
 			return socket.send(msg);

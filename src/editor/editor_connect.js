@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import WebSocket from 'websocket-heartbeat-js';
 
 const MAX_ATTEMPTS = 2;

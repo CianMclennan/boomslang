@@ -1,19 +1,19 @@
 .wrapper {
-    height: 100vh;
-    display: grid;
-    grid-template-rows: 6.25rem 1fr;
+	height: 100vh;
+	display: grid;
+	grid-template-rows: 6.25rem 1fr;
 
-    &--hidden {
-        grid-template-rows: 0rem 1fr;
-    }
+	&--hidden {
+		grid-template-rows: 0rem 1fr;
+	}
 
-    .editor {
-        background-color: white;
-        overflow: hidden;
+	.editor {
+		background-color: white;
+		overflow: hidden;
 
-        &__toggle-btn {
-            position: absolute;
-            right: 0rem;
-        }
-    }
+		&__toggle-btn {
+			position: absolute;
+			right: 0rem;
+		}
+	}
 }

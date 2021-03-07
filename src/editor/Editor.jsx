@@ -8,7 +8,10 @@ const Editor = () => {
 	return (
 		<div className={`wrapper ${isHidden ? 'wrapper--hidden' : ''}`}>
 			<div className="editor">
-				<button className="editor__toggle-btn" onClick={() => setIsHidden(!isHidden)}>
+				<button
+					className="editor__toggle-btn"
+					onClick={() => setIsHidden(!isHidden)}
+				>
 					{isHidden ? 'Editor' : 'Hide'}
 				</button>
 				<button onClick={() => console.log('click')}>Hello World</button>

@@ -12,11 +12,11 @@ const Navigation = () => {
 		gridTemplateRows: `${header && '80px'} 1fr ${footer && '80px'}`,
 	};
 
-	return ( 
+	return (
 		<div className={NAVIGATION} style={inlineStyle}>
 			{header && <header className={HEADER} />}
 			<Main />
-			{footer && <Footer/>}
+			{footer && <Footer />}
 		</div>
 	);
 };

@@ -1,37 +1,37 @@
 .navigation {
-    display: grid;
-    overflow: hidden;
+	display: grid;
+	overflow: hidden;
 
-    &__header {
-        background-color: #333;
-    }
+	&__header {
+		background-color: #333;
+	}
 
-    &__footer {
-        background-color: #333;
-        display: flex;
-        flex-flow: row-reverse;
-        height: 100%;
+	&__footer {
+		background-color: #333;
+		display: flex;
+		flex-flow: row-reverse;
+		height: 100%;
 
-        &__buttons {
-            display: flex;
-            flex-flow: row-reverse;
-            height: 100%;
-        }
-    }
+		&__buttons {
+			display: flex;
+			flex-flow: row-reverse;
+			height: 100%;
+		}
+	}
 
-    .slider {
-        height: 100%;
-        overflow: hidden;
+	.slider {
+		height: 100%;
+		overflow: hidden;
 
-        &__screen {
-            position: relative;
-            height: 100%;
-            will-change: left;
-            overflow: auto;
-            &--secondary {
-                left: 100%;
-                top: -100%;
-            }
-        }
-    }
+		&__screen {
+			position: relative;
+			height: 100%;
+			will-change: left;
+			overflow: auto;
+			&--secondary {
+				left: 100%;
+				top: -100%;
+			}
+		}
+	}
 }
