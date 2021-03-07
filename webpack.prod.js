@@ -16,8 +16,12 @@ module.exports = (env) => {
 		performance: {
 			hints: 'error',
 		},
-		entry: {
-			boomslang: path.resolve(__dirname, 'src', 'index.js'),
+		output: {
+			path: path.resolve(__dirname, 'dist'),
+			clean: true,
 		},
+		// entry: {
+		// 	boomslang: path.resolve(__dirname, 'src', 'index.js'),
+		// },
 	};
 };
