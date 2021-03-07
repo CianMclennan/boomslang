@@ -1,17 +1,20 @@
-import React from 'react';
-import common from 'src/common/common.js';
+import React, { Suspense } from 'react';
+import components from 'src/components/components.js';
 
 /**
  * Takes an object and tries to create a React element from it.
  * @param {*} obj
- * @returns
+ * @returns React element or the same object that was passed in if it is unparsable.
  */
 const parse = (obj) => {
     const { component: componentName, ...props } = obj;
-    const component = common[componentName];
-    console.log(componentName);
+    const component = components[componentName];
     if (component) {
-        return React.createElement(component, props);
+        return (
+            <Suspense fallback={'.'}>
+                {React.createElement(component, props)}
+            </Suspense>
+        );
     }
     return obj;
 };

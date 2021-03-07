@@ -4,7 +4,10 @@ export default {
         component: 'Accordian',
         data: [
             {
-                title: 'title1',
+                title: {
+                    component: 'Text',
+                    text: 'title1',
+                },
                 content:
                     'Nibh inceptos amet laoreet lobortis facilisi sapien sit varius interdum',
             },

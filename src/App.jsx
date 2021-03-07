@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { render } from 'react-dom';
-
 import Navigation from './navigation/Navigation.jsx'
 
 import './styles/reset.css';

@@ -1,15 +1,15 @@
 .accordian {
-    min-height: 100px;
+    min-height: 6.25rem;
 
     &__header {
         background-color: sandybrown;
-        padding: 5px;
-        font-size: 1.2em;
+        padding: 0.3rem;
+        font-size: 1.2rem;
     }
 
     &__content {
         background-color: pink;
-        min-height: 200px;
+        min-height: 12.5rem;
 
         &--hidden {
             display: none;

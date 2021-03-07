@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Main from './components/Main.jsx';
 import Footer from './components/Footer.jsx'
+import { NAVIGATION, HEADER } from './constants.js'
 import './navigation.scss'
 
 const Navigation = () => {
@@ -12,8 +13,8 @@ const Navigation = () => {
     }
 
     return ( 
-        <div className="navigation" style={inlineStyle}>
-            {header && <header className="navigation__header" />}
+        <div className={NAVIGATION} style={inlineStyle}>
+            {header && <header className={HEADER} />}
             <Main />
             {footer && <Footer/>}
         </div>

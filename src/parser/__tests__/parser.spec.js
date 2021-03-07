@@ -1,6 +1,5 @@
 import data from '../__mock__/mockData.js';
 import parse from '../parser.js';
-import { iteratee } from 'lodash';
 
 describe('Component Parser', () => {
     it('Should return the value that is passed into it when it has no component attribute.', () => {

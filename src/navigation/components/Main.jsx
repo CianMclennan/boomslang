@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import gsap from 'gsap'
 import { useSelector } from 'react-redux';
 import screens from 'src/screens/screens.js';
+import { SLIDER, SCREEN, SCREEN_SECOND } from '../constants.js'
 
 let animationSpeed = 0;
 let isScreen1 = true;
@@ -58,11 +59,11 @@ const Navigation = () => {
     });
 
     return (
-    <div className="slider">
-        <main className="slider__screen" ref={screen1} aria-hidden={!isScreen1}>
+    <div className={SLIDER}>
+        <main className={SCREEN} ref={screen1} aria-hidden={!isScreen1}>
             {screen1Content}
         </main>
-        <main className="slider__screen slider__screen--offscreen" ref={screen2} aria-hidden={isScreen1}>
+        <main className={SCREEN_SECOND} ref={screen2} aria-hidden={isScreen1}>
             {screen2Content}
         </main>
     </div>
