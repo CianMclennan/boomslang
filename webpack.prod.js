@@ -13,6 +13,9 @@ module.exports = (env) => {
 				__REACT_DEVTOOLS_GLOBAL_HOOK__: '({ isDisabled: true })',
 			}),
 		],
+		performance: {
+			hints: 'error',
+		},
 		entry: {
 			boomslang: path.resolve(__dirname, 'src', 'index.js'),
 		},

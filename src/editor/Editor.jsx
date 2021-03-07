@@ -14,7 +14,7 @@ const Editor = () => {
 				>
 					{isHidden ? 'Editor' : 'Hide'}
 				</button>
-				<button onClick={() => console.log('click')}>Hello World</button>
+				<button>Hello World</button>
 			</div>
 			<App />
 		</div>

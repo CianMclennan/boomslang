@@ -7,7 +7,7 @@ module.exports = (env) => {
 		...conf,
 		mode: 'development',
 		performance: {
-			// hints: false,
+			hints: false,
 		},
 		devtool: 'source-map',
 	};
