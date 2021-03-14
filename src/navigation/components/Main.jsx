@@ -1,7 +1,7 @@
-import { fetchScreen } from 'src/parser/fetchScreen.js';
+import { fetchScreen } from 'src/screenBuilder/fetchScreen.js';
 import gsap from 'gsap';
 import { isUndefined } from 'lodash';
-import parse from 'src/parser/parser.js';
+import parse from 'src/screenBuilder/parser.js';
 import { screenContentAdded } from 'src/store/reducers/navigation.js';
 import React, { useEffect, useRef, useState } from 'react';
 import { SCREEN, SCREEN_SECOND, SLIDER } from '../constants.js';

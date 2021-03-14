@@ -1,6 +1,6 @@
 import './accordian.scss';
 import PropTypes from 'prop-types';
-import parse from 'src/parser/parser.js';
+import parse from 'src/screenBuilder/parser.js';
 import { ACCORDIAN, CONTENT, CONTENT_HIDDEN, HEADER } from './constants.js';
 import React, { useState } from 'react';
 
@@ -14,14 +14,14 @@ const Accordian = ({ data }) => {
 	const content = (data || []).map(({ title, content }, index) => {
 		const isHidden = index !== selected;
 		return (
-			<div key={index}>
+			<section key={index}>
 				<div className={HEADER} onClick={() => handleHeaderClick(index)}>
 					{parse(title)}
 				</div>
 				<div className={`${isHidden ? CONTENT_HIDDEN : CONTENT}`}>
 					{parse(content)}
 				</div>
-			</div>
+			</section>
 		);
 	});
 
