@@ -1,8 +1,8 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 
 const Text = ({ text }) => {
-	return <span>{text}</span>;
+	return <span style={{ fontSize: '2rem' }}>{text}</span>;
 };
 
 Text.propTypes = {

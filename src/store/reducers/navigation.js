@@ -1,5 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
 import { NavigationRules } from 'src/structure.js';
+import { createSlice } from '@reduxjs/toolkit';
 
 const slice = createSlice({
 	name: 'navigation',
@@ -7,14 +7,18 @@ const slice = createSlice({
 		screens: [],
 		current_screen: '',
 		transition_direction: '',
+		screen_content: {},
 	},
 	reducers: {
-		screenAdded: (navigation, action) => {
-			navigation.screens.push(action.payload.name);
+		screenAdded: (navigation, { payload: { name } }) => {
+			navigation.screens.push(name);
 		},
-		currentScreenSet: (navigation, action) => {
-			navigation.current_screen = action.payload.screen;
-			navigation.transition_direction = action.payload.direction;
+		currentScreenSet: (navigation, { payload: { screen, direction } }) => {
+			navigation.current_screen = screen;
+			navigation.transition_direction = direction;
+		},
+		screenContentAdded: (navigation, { payload: { screenId, content } }) => {
+			navigation.screen_content[screenId] = content;
 		},
 		nextScreen: (navigation) => {
 			const { screens, current_screen } = navigation;
@@ -57,6 +61,7 @@ const slice = createSlice({
 
 export const {
 	screenAdded,
+	screenContentAdded,
 	currentScreenSet,
 	nextScreen,
 	prevScreen,

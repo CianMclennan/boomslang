@@ -1,5 +1,10 @@
-import React, { Suspense } from 'react';
 import components from 'src/components/components.js';
+import React, { Suspense } from 'react';
+/**
+ * @type {Set<string>} Stores the names of components that have been loaded used to
+ * determine if component needs to be wrapped in Suspense component
+ */
+const loadedComponents = new Set();
 
 /**
  * Takes an object and tries to create a React element from it.
@@ -10,7 +15,11 @@ const parse = (obj) => {
 	const { component: componentName, ...props } = obj;
 	const component = components[componentName];
 	if (component) {
-		return (
+		const isLoaded = loadedComponents.has(componentName);
+		if (!isLoaded) loadedComponents.add(componentName);
+		return isLoaded ? (
+			React.createElement(component, props)
+		) : (
 			<Suspense fallback={'.'}>
 				{React.createElement(component, props)}
 			</Suspense>

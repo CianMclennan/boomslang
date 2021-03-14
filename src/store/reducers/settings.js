@@ -1,6 +1,5 @@
-import settings from 'src/settings.js';
-
 import { createSlice } from '@reduxjs/toolkit';
+import settings from 'src/settings.js';
 
 const slice = createSlice({
 	name: 'settings',

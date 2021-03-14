@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import App from 'src/App.jsx';
 import './editor.scss';
+import App from 'src/App.jsx';
+import React, { useState } from 'react';
 
 const Editor = () => {
 	const [isHidden, setIsHidden] = useState(true);

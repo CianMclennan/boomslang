@@ -1,5 +1,5 @@
-import React from 'react';
 import Accordian from 'src/components/Accordian/Accordian.jsx';
+import React from 'react';
 
 export default () => {
 	const data = [

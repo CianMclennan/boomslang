@@ -8,8 +8,11 @@ export default {
 					component: 'Text',
 					text: 'title1',
 				},
-				content:
-					'Nibh inceptos amet laoreet lobortis facilisi sapien sit varius interdum',
+				content: {
+					component: 'Text',
+					text:
+						'Nibh inceptos amet laoreet lobortis facilisi sapien sit varius interdum',
+				},
 			},
 			{
 				title: 'title2',

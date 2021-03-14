@@ -6,9 +6,9 @@
 	"scripts": {
 		"dev": "webpack --config webpack.dev.js",
 		"watch": "webpack serve --progress --config webpack.dev.js",
-		"server": "node -r esm server/index.js",
+		"server": "node -r esm server/server.js",
 		"build": "webpack --config webpack.prod.js",
-		"test": "jest"
+		"test": "npx jest"
 	},
 	"author": "Cian Mclennan",
 	"license": "ISC",

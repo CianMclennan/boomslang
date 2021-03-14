@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import Main from './components/Main.jsx';
-import Footer from './components/Footer.jsx';
-import { NAVIGATION, HEADER } from './constants.js';
 import './navigation.scss';
+import Footer from './components/Footer.jsx';
+import Main from './components/Main.jsx';
+import { HEADER, NAVIGATION } from './constants.js';
+import React, { useState } from 'react';
 
 const Navigation = () => {
 	const [header] = useState(true);

@@ -1,4 +1,4 @@
-import data from '../__mock__/mockData.js';
+import data from '../__mocks__/mockData.js';
 import parse from '../parser.js';
 
 describe('Component Parser', () => {

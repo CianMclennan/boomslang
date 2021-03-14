@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import { ACCORDIAN, HEADER, CONTENT, CONTENT_HIDDEN } from './constants.js';
-import parse from 'src/parser/parser.js';
 import './accordian.scss';
+import PropTypes from 'prop-types';
+import parse from 'src/parser/parser.js';
+import { ACCORDIAN, CONTENT, CONTENT_HIDDEN, HEADER } from './constants.js';
+import React, { useState } from 'react';
 
 const Accordian = ({ data }) => {
 	const [selected, setSelected] = useState(0);

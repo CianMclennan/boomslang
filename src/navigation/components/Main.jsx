@@ -1,8 +1,11 @@
-import React, { useRef, useState, useEffect } from 'react';
+import { fetchScreen } from 'src/parser/fetchScreen.js';
 import gsap from 'gsap';
-import { useSelector } from 'react-redux';
-import screens from 'src/screens/screens.js';
-import { SLIDER, SCREEN, SCREEN_SECOND } from '../constants.js';
+import { isUndefined } from 'lodash';
+import parse from 'src/parser/parser.js';
+import { screenContentAdded } from 'src/store/reducers/navigation.js';
+import React, { useEffect, useRef, useState } from 'react';
+import { SCREEN, SCREEN_SECOND, SLIDER } from '../constants.js';
+import { useDispatch, useSelector } from 'react-redux';
 
 let animationSpeed = 0;
 let isScreen1 = true;
@@ -11,6 +14,7 @@ let shouldAnimate = false;
 let animationDirection = '';
 
 const Navigation = () => {
+	const dispatch = useDispatch();
 	const screen1 = useRef();
 	const screen2 = useRef();
 	const [screen1Content, updateScreen1] = useState(<></>);
@@ -42,17 +46,24 @@ const Navigation = () => {
 	};
 
 	// listening for 'current_screen' to be updated
-	useSelector((state) => {
-		const screenID = state.navigation.current_screen;
-		if (!screenID || screenID === screenDisplayed) return;
+	useSelector(({ navigation, settings }) => {
+		const {
+			screen_content: content,
+			current_screen: screenId,
+			transition_direction: direction,
+		} = navigation;
+		const {
+			screen_transition: shouldTransition,
+			screen_transition_speed: transitionSpeed,
+		} = settings;
 
-		screenDisplayed = screenID;
-		animationSpeed = state.settings.screen_transition_speed || 0;
-		animationDirection = state.navigation.transition_direction || '';
-		shouldAnimate =
-			state.settings.screen_transition &&
-			animationSpeed > 0 &&
-			animationDirection.length;
+		if (!screenId || screenId === screenDisplayed) return;
+
+		animationSpeed = transitionSpeed || 0;
+		animationDirection = direction || '';
+		shouldAnimate = Boolean(
+			shouldTransition && animationSpeed > 0 && animationDirection.length
+		);
 
 		let updateScreen = () => {
 			throw new Error('\'updateScreen\' is unset.');
@@ -62,7 +73,14 @@ const Navigation = () => {
 		} else {
 			updateScreen = shouldAnimate ? updateScreen1 : updateScreen2;
 		}
-		updateScreen(screens[screenID]);
+		if (isUndefined(content[screenId])) {
+			fetchScreen(screenId).then((content) => {
+				dispatch(screenContentAdded({ screenId, content }));
+			});
+		} else {
+			updateScreen(parse(content[screenId]));
+			screenDisplayed = screenId;
+		}
 	});
 
 	useEffect(() => {
