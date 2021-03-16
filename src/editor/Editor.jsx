@@ -1,11 +1,24 @@
 import './editor.scss';
 import App from 'src/App.jsx';
+import JsonEditor from './views/JsonEditor/JsonEditor.jsx';
+import Overlay from './views/Overlay/Overlay.jsx';
 import { useSelector } from 'react-redux';
 import React, { useState } from 'react';
 
 const Editor = () => {
 	const [isHidden, setIsHidden] = useState(true);
-	const currentScreen = useSelector((state) => state.navigation.current_screen);
+	const [overlay, setOverlay] = useState(null);
+	const [currentScreen, screenContent] = useSelector(({ navigation }) => {
+		const { current_screen: screen, screen_content: content } = navigation;
+		return [screen, content[screen]];
+	});
+
+	const handleClose = () => {
+		setOverlay(null);
+	};
+	const handleOpenJsonEditor = () => {
+		setOverlay(<JsonEditor src={screenContent} />);
+	};
 
 	return (
 		<div className={`wrapper ${isHidden ? 'wrapper--hidden' : ''}`}>
@@ -17,9 +30,12 @@ const Editor = () => {
 					{isHidden ? 'Editor' : 'Hide'}
 				</button>
 				<div>Current Screen: {currentScreen}</div>
-				<button>Edit screen</button>
+				<button onClick={handleOpenJsonEditor}>Edit screen</button>
 			</div>
 			<App />
+			{overlay && (
+				<Overlay content={overlay} closeHandler={handleClose}></Overlay>
+			)}
 		</div>
 	);
 };

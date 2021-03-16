@@ -14,9 +14,14 @@ export const fetchScreen = (screenId) => {
 
 	return fetch(request)
 		.then((response) => response.json())
-		.then(({ ok, screen }) => {
+		.then(({ ok, screen, error }) => {
 			if (ok) {
 				return screen;
 			}
+			let msg = `Failed to load ${screenId}`;
+			if (error) {
+				msg += `\nError\n${error}`;
+			}
+			return msg;
 		});
 };

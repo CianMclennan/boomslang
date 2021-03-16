@@ -12,6 +12,7 @@ const loadedComponents = new Set();
  * @returns React element or the same object that was passed in if it is unparsable.
  */
 const parse = (obj) => {
+	if (!obj) return obj;
 	const { component: componentName, ...props } = obj;
 	const component = components[componentName];
 	if (component) {

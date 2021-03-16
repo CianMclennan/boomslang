@@ -39,7 +39,6 @@ app.get('/screen/:id', (req, res) => {
 		const {
 			params: { id: screenId },
 		} = req;
-		console.log('screenId:', screenId);
 
 		if (error) {
 			res.send({ ok: false, error });
@@ -49,11 +48,12 @@ app.get('/screen/:id', (req, res) => {
 		const db = client.db(dbName);
 
 		const collection = db.collection('screens');
-		collection.find({}).toArray((error, screens) => {
-			if (error) {
+		collection.find({ screen_id: screenId }).toArray((error, screens) => {
+			if (error || !screens.length) {
 				res.send({ ok: false, error });
 				return;
 			}
+			console.log('screens:', screens.length);
 			const [screen] = screens;
 			res.send({ ok: true, screen });
 		});

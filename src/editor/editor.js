@@ -16,6 +16,7 @@ const { start_screen: screen, title } = store.getState().settings;
 store.dispatch(currentScreenSet({ screen }));
 
 document.title = title;
+window.ReactDOM = ReactDOM;
 ReactDOM.render(
 	<Provider store={store}>
 		<Editor />

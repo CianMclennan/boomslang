@@ -1,7 +1,7 @@
+import Screen from './Screen.jsx';
 import { fetchScreen } from 'src/screenBuilder/fetchScreen.js';
 import gsap from 'gsap';
 import { isUndefined } from 'lodash';
-import parse from 'src/screenBuilder/parser.js';
 import { screenContentAdded } from 'src/store/reducers/navigation.js';
 import React, { useEffect, useRef, useState } from 'react';
 import { SCREEN, SCREEN_SECOND, SLIDER } from '../constants.js';
@@ -13,12 +13,13 @@ let screenDisplayed = '';
 let shouldAnimate = false;
 let animationDirection = '';
 
-const Navigation = () => {
+const Main = () => {
 	const dispatch = useDispatch();
 	const screen1 = useRef();
 	const screen2 = useRef();
-	const [screen1Content, updateScreen1] = useState(<></>);
-	const [screen2Content, updateScreen2] = useState(<></>);
+	const [screen1Content, updateScreen1] = useState('');
+	const [screen2Content, updateScreen2] = useState('');
+	const [pendingRequests, updatePendingRequests] = useState([]);
 
 	const rightToLeft = () => {
 		gsap.fromTo(
@@ -73,13 +74,16 @@ const Navigation = () => {
 		} else {
 			updateScreen = shouldAnimate ? updateScreen1 : updateScreen2;
 		}
-		if (isUndefined(content[screenId])) {
+
+		const contentLoaded = !isUndefined(content[screenId]);
+		const requestIsPending = pendingRequests.includes(screenId);
+		if (!requestIsPending && !contentLoaded) {
+			updatePendingRequests([...pendingRequests, screenId]);
 			fetchScreen(screenId).then((content) => {
+				updateScreen(screenId);
+				screenDisplayed = screenId;
 				dispatch(screenContentAdded({ screenId, content }));
 			});
-		} else {
-			updateScreen(parse(content[screenId]));
-			screenDisplayed = screenId;
 		}
 	});
 
@@ -98,14 +102,20 @@ const Navigation = () => {
 
 	return (
 		<div className={SLIDER}>
-			<main className={SCREEN} ref={screen1} aria-hidden={!isScreen1}>
-				{screen1Content}
-			</main>
-			<main className={SCREEN_SECOND} ref={screen2} aria-hidden={isScreen1}>
-				{screen2Content}
-			</main>
+			<Screen
+				screenId={screen1Content}
+				className={SCREEN}
+				ref={screen1}
+				aria-hidden={!isScreen1}
+			/>
+			<Screen
+				screenId={screen2Content}
+				className={SCREEN_SECOND}
+				ref={screen2}
+				aria-hidden={isScreen1}
+			/>
 		</div>
 	);
 };
 
-export default Navigation;
+export default Main;
