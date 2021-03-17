@@ -59,7 +59,6 @@ const Main = () => {
 		} = settings;
 
 		if (!screenId || screenId === screenDisplayed) return;
-
 		animationSpeed = transitionSpeed || 0;
 		animationDirection = direction || '';
 		shouldAnimate = Boolean(

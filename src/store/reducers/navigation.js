@@ -20,6 +20,16 @@ const slice = createSlice({
 		screenContentAdded: (navigation, { payload: { screenId, content } }) => {
 			navigation.screen_content[screenId] = content;
 		},
+		updateContent: (navigation, { payload: { path, content } }) => {
+			const pathArr = path.split('/');
+			let reference = navigation.screen_content;
+			while (pathArr.length > 1) {
+				const pos = pathArr.shift();
+				reference = reference[pos];
+			}
+			const [attr] = pathArr;
+			reference[attr] = content;
+		},
 		nextScreen: (navigation) => {
 			const { screens, current_screen } = navigation;
 			const rule = NavigationRules[current_screen];
@@ -61,8 +71,9 @@ const slice = createSlice({
 
 export const {
 	screenAdded,
-	screenContentAdded,
 	currentScreenSet,
+	screenContentAdded,
+	updateContent,
 	nextScreen,
 	prevScreen,
 } = slice.actions;
