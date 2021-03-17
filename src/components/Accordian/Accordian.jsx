@@ -4,7 +4,7 @@ import parse from 'src/screenBuilder/parser.js';
 import { ACCORDIAN, CONTENT, CONTENT_HIDDEN, HEADER } from './constants.js';
 import React, { useState } from 'react';
 
-const Accordian = ({ data }) => {
+const Accordian = ({ data, path }) => {
 	const [selected, setSelected] = useState(0);
 
 	const handleHeaderClick = (index) => {
@@ -16,10 +16,10 @@ const Accordian = ({ data }) => {
 		return (
 			<section key={index}>
 				<div className={HEADER} onClick={() => handleHeaderClick(index)}>
-					{parse(title)}
+					{parse({ ...title, path: `${path}/data/${index}/title` })}
 				</div>
 				<div className={`${isHidden ? CONTENT_HIDDEN : CONTENT}`}>
-					{parse(content)}
+					{parse({ ...content, path: `${path}/data/${index}/content` })}
 				</div>
 			</section>
 		);
@@ -35,6 +35,7 @@ Accordian.propTypes = {
 			content: PropTypes.any.isRequired,
 		})
 	),
+	path: PropTypes.string,
 };
 
 export default Accordian;

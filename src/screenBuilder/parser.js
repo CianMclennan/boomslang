@@ -13,16 +13,25 @@ const loadedComponents = new Set();
  */
 const parse = (obj) => {
 	if (!obj) return obj;
-	const { component: componentName, ...props } = obj;
+	const {
+		screen_id: screenId,
+		path: parentPath,
+		component: componentName,
+		...props
+	} = obj;
 	const component = components[componentName];
 	if (component) {
+		const path = parentPath ?? screenId;
+		if (!path) {
+			console.error(`Component '${componentName}' did not receive a path.`);
+		}
 		const isLoaded = loadedComponents.has(componentName);
 		if (!isLoaded) loadedComponents.add(componentName);
 		return isLoaded ? (
-			React.createElement(component, props)
+			React.createElement(component, { ...props, path })
 		) : (
 			<Suspense fallback={'.'}>
-				{React.createElement(component, props)}
+				{React.createElement(component, { ...props, path })}
 			</Suspense>
 		);
 	}
