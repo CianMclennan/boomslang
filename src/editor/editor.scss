@@ -1,19 +1,23 @@
 .wrapper {
 	height: 100vh;
-	display: grid;
-	grid-template-rows: 6.25rem 1fr;
+	display: flex;
+	flex-direction: column;
 
-	&--hidden {
-		grid-template-rows: 0rem 1fr;
+	.toggle-editor-btn {
+		position: absolute;
+		right: 0em;
 	}
 
 	.editor {
 		background-color: white;
 		overflow: hidden;
+		max-height: 25%;
 
-		&__toggle-btn {
-			position: absolute;
-			right: 0rem;
+		&--hidden {
+			display: none;
 		}
+	}
+	.navigation {
+		flex-grow: 1;
 	}
 }

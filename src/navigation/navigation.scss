@@ -1,20 +1,22 @@
 .navigation {
-	display: grid;
+	display: flex;
+	flex-direction: column;
 	overflow: hidden;
 
 	&__header {
 		background-color: #333;
+		flex-basis: 3em;
 	}
 
 	&__footer {
+		flex-basis: 3em;
 		background-color: #333;
 		display: flex;
-		flex-flow: row-reverse;
+		justify-content: flex-end;
 		height: 100%;
 
 		&__buttons {
 			display: flex;
-			flex-flow: row-reverse;
 			height: 100%;
 		}
 	}

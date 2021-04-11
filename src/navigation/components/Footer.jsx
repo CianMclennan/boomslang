@@ -8,8 +8,8 @@ const Footer = () => {
 	return (
 		<footer className="navigation__footer">
 			<div className="navigation__footer__buttons">
-				<button onClick={() => dispatch(nextScreen())}>Next</button>
 				<button onClick={() => dispatch(prevScreen())}>Prev</button>
+				<button onClick={() => dispatch(nextScreen())}>Next</button>
 			</div>
 		</footer>
 	);

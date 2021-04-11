@@ -1,16 +1,24 @@
 .accordian {
 	&__header {
 		background-color: sandybrown;
-		padding: 0.3rem;
+		padding: 0.3em;
 		font-size: 1.2rem;
 	}
 
 	&__content {
 		background-color: pink;
-		min-height: 12.5rem;
+		transition: height 500ms;
+		padding: 0.3em;
+		overflow: auto;
+		height: 15em;
 
 		&--hidden {
-			display: none;
+			height: 0;
+		}
+
+		& .placeholder {
+			height: 100%;
+			background: none;
 		}
 	}
 }

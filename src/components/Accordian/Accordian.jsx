@@ -1,27 +1,36 @@
 import './accordian.scss';
 import Placeholder from 'src/components/Placeholder/Placeholder.jsx';
 import PropTypes from 'prop-types';
-import { clone } from 'lodash';
+import clone from 'lodash/clone';
 import parse from 'src/screenBuilder/parser.js';
+import template from './AccordianTemplate.js';
 import { updateContent } from 'src/store/reducers/navigation.js';
 import { useDispatch } from 'react-redux';
 import { ACCORDIAN, CONTENT, CONTENT_HIDDEN, HEADER } from './constants.js';
 import React, { useState } from 'react';
 
 const Accordian = ({ data, path }) => {
+	const _screenId = path.match(/^\w+/).pop();
 	const dispatch = useDispatch();
 	const [selected, setSelected] = useState(0);
+	const [screenId, setScreenId] = useState(_screenId);
+
+	const resetState = () => {
+		setScreenId(_screenId);
+		setSelected(0);
+	};
+	if (screenId !== _screenId) {
+		// if the screen has changed reset the state.
+		resetState();
+	}
 
 	const handleHeaderClick = (index) => {
 		const newIndex = index === selected ? -1 : index;
 		setSelected(newIndex);
 	};
 	const handleUpdate = () => {
-		const test = clone(data[0]);
 		const _data = clone(data);
-		_data.push(test);
-		// eslint-disable-next-line no-console
-		// console.log(_data);
+		_data.push(template);
 		dispatch(updateContent({ path: `${path}/data`, content: _data }));
 	};
 	const content = (data || []).map(({ title, content }, index) => {

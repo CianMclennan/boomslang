@@ -1,8 +1,9 @@
 import './editor.scss';
 import App from 'src/App.jsx';
 import JsonEditor from './views/JsonEditor/JsonEditor.jsx';
-import Overlay from './views/Overlay/Overlay.jsx';
+import Overlay from 'src/shared/Overlay/Overlay.jsx';
 import { useSelector } from 'react-redux';
+import { EDITOR, EDITOR_HIDDEN, TOGGLE_EDITOR, WRAPPER } from './constants.js';
 import React, { useState } from 'react';
 
 const Editor = () => {
@@ -21,14 +22,11 @@ const Editor = () => {
 	};
 
 	return (
-		<div className={`wrapper ${isHidden ? 'wrapper--hidden' : ''}`}>
-			<div className="editor">
-				<button
-					className="editor__toggle-btn"
-					onClick={() => setIsHidden(!isHidden)}
-				>
-					{isHidden ? 'Editor' : 'Hide'}
-				</button>
+		<div className={WRAPPER}>
+			<button className={TOGGLE_EDITOR} onClick={() => setIsHidden(!isHidden)}>
+				{isHidden ? 'Editor' : 'Hide'}
+			</button>
+			<div className={isHidden ? EDITOR_HIDDEN : EDITOR}>
 				<div>Current Screen: {currentScreen}</div>
 				<button onClick={handleOpenJsonEditor}>Edit screen</button>
 			</div>
