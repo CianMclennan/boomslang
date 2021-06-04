@@ -3,6 +3,11 @@
 	display: flex;
 	flex-direction: column;
 
+	// iPhone
+	@media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
+		height: -webkit-fill-available;
+	}
+
 	.toggle-editor-btn {
 		position: absolute;
 		right: 0em;
@@ -12,9 +17,14 @@
 		background-color: white;
 		overflow: hidden;
 		max-height: 25%;
+		display: flex;
 
 		&--hidden {
 			display: none;
+		}
+
+		& * {
+			margin-left: 1em;
 		}
 	}
 	.navigation {

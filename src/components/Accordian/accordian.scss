@@ -8,15 +8,14 @@
 	&__content {
 		background-color: pink;
 		transition: height 500ms;
-		padding: 0.3em;
 		overflow: auto;
-		height: 15em;
+		height: max(15em, calc(100vh / 5));
 
 		&--hidden {
 			height: 0;
 		}
 
-		& .placeholder {
+		.placeholder {
 			height: 100%;
 			background: none;
 		}
