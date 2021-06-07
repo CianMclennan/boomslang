@@ -1,6 +1,6 @@
 import './editor.scss';
 import App from 'src/App.jsx';
-import JsonEditor from './views/JsonEditor/JsonEditor.jsx';
+import JsonEditor from './components/JsonEditor/JsonEditor.jsx';
 import Overlay from 'src/shared/Overlay/Overlay.jsx';
 import { useSelector } from 'react-redux';
 import { EDITOR, EDITOR_HIDDEN, TOGGLE_EDITOR, WRAPPER } from './constants.js';

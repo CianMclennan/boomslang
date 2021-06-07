@@ -25,7 +25,7 @@ const Main = () => {
 	if (!contentIsLoaded && !requestIsPending) {
 		const newPendingRequests = [...pendingRequests, screenId];
 		// eslint-disable-next-line no-console
-		console.log(newPendingRequests);
+		console.log('PendingRequests', newPendingRequests);
 		updatePendingRequests(newPendingRequests);
 		fetchScreen(screenId).then((content) => {
 			dispatch(screenContentAdded({ screenId, content }));
@@ -34,7 +34,12 @@ const Main = () => {
 
 	return (
 		<div className={SLIDER}>
-			<Screen screenId={screenId} className={SCREEN} aria-hidden={!isScreen1} />
+			<Screen
+				key={screenId}
+				screenId={screenId}
+				className={SCREEN}
+				aria-hidden={!isScreen1}
+			/>
 		</div>
 	);
 };

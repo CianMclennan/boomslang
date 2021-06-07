@@ -35,7 +35,7 @@ const parse = (obj) => {
 			</Suspense>
 		);
 	}
-	return obj;
+	return JSON.stringify(obj);
 };
 
 export default parse;

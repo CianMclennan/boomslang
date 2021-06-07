@@ -1,6 +1,5 @@
-import './accordian.scss';
 import Accordian from 'src/components/Accordian/Accordian.jsx';
-import Placeholder from 'src/components/Placeholder/Placeholder.jsx';
+import Placeholder from 'src/editor/components/Placeholder/Placeholder.jsx';
 import PropTypes from 'prop-types';
 import React from 'react';
 import clone from 'lodash/clone';
@@ -35,4 +34,4 @@ AccordianEditor.propTypes = {
 	path: PropTypes.string,
 };
 
-export default Accordian;
+export default AccordianEditor;
