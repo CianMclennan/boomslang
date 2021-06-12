@@ -1,4 +1,5 @@
 import Editor from './Editor.jsx';
+import OverlayProvider from 'src/navigation/OverlayProvider.jsx';
 import { Provider } from 'react-redux';
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -18,8 +19,10 @@ store.dispatch(currentScreenSet({ screen }));
 document.title = title;
 window.ReactDOM = ReactDOM;
 ReactDOM.render(
-	<Provider store={store}>
-		<Editor />
-	</Provider>,
+	<OverlayProvider>
+		<Provider store={store}>
+			<Editor />
+		</Provider>
+	</OverlayProvider>,
 	document.getElementById('root')
 );

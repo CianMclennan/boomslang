@@ -30,7 +30,7 @@ const parse = (obj) => {
 		return isLoaded ? (
 			React.createElement(component, { ...props, path })
 		) : (
-			<Suspense fallback={'.'}>
+			<Suspense fallback={<></>}>
 				{React.createElement(component, { ...props, path })}
 			</Suspense>
 		);
