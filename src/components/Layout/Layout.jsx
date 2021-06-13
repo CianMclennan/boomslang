@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import parse from 'src/screenBuilder/parser.js';
+import { useParser } from 'src/screenBuilder/ParserProvider.jsx';
 
 const Layout = ({ child, style, path }) => {
+	const parse = useParser();
 	return <div style={style}>{parse({ ...child, path: `${path}/child` })}</div>;
 };
 

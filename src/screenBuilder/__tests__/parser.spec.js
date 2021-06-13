@@ -1,5 +1,5 @@
 import data from '../__mocks__/mockData.js';
-import parse from '../parser.js';
+import parse from '../defaultParser.js';
 
 describe('Component Parser', () => {
 	it('Should return the value that is passed into it when it has no component attribute.', () => {

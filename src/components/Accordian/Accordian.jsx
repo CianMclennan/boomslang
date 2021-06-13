@@ -1,11 +1,12 @@
 import './accordian.scss';
 import PropTypes from 'prop-types';
-import parse from 'src/screenBuilder/parser.js';
+import { useParser } from 'src/screenBuilder/ParserProvider.jsx';
 import { ACCORDIAN, CONTENT, CONTENT_HIDDEN, HEADER } from './constants.js';
 import React, { useState } from 'react';
 
 const Accordian = ({ data, path }) => {
 	const [selected, setSelected] = useState(0);
+	const parse = useParser();
 
 	const handleHeaderClick = (index) => {
 		const newIndex = index === selected ? -1 : index;

@@ -20,7 +20,7 @@ export const fetchScreen = (screenId) => {
 			}
 			let msg = `Failed to load ${screenId}`;
 			if (error) {
-				msg += `\nError\n${error}`;
+				msg += ` - ${JSON.stringify(error)}`;
 			}
 			return msg;
 		});
