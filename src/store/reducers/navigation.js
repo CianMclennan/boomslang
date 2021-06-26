@@ -38,7 +38,7 @@ const slice = createSlice({
 				navigation.transition_direction = 'rtl';
 			};
 
-			if (rule && rule.next) {
+			if (rule?.next) {
 				goNext(rule.next);
 			} else {
 				let index = screens.indexOf(current_screen);
@@ -56,7 +56,7 @@ const slice = createSlice({
 				navigation.transition_direction = 'ltr';
 			};
 
-			if (rule && rule.prev) {
+			if (rule?.prev) {
 				goNext(rule.prev);
 			} else {
 				let index = screens.indexOf(current_screen);

@@ -4,6 +4,7 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
+		"start": "npm run watch",
 		"dev": "webpack --config webpack.dev.js",
 		"watch": "webpack serve --progress --config webpack.dev.js",
 		"server": "node -r esm server/server.js",

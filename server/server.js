@@ -61,6 +61,16 @@ app.get('/screen/:id', (req, res) => {
 	});
 });
 
+app.post('/screen/:id', (req, res) => {
+	const {
+		params: { id: screenId },
+		body,
+	} = req;
+	console.log('Update:', screenId);
+	console.log('Body:', body);
+	res.send({ ok: true });
+});
+
 app.ws('/', (socket) => {
 	socket.on('message', function (msg) {
 		if (msg === 'heartbeat') {

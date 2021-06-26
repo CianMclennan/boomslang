@@ -1,6 +1,7 @@
 .navigation {
 	display: flex;
 	flex-direction: column;
+	flex-grow: 1;
 
 	&__header {
 		background-color: #333;

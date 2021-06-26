@@ -25,3 +25,24 @@ export const fetchScreen = (screenId) => {
 			return msg;
 		});
 };
+
+export const postScreen = (screenId = 'test') => {
+	const headers = new Headers({
+		'Content-Type': 'application/json',
+	});
+	const requestUrl = `${url}/screen/${screenId}`;
+	const options = {
+		headers,
+		method: 'POST',
+		mode: 'cors',
+		cache: 'default',
+		body: JSON.stringify({ test: 'hi' }),
+	};
+
+	return (
+		fetch(requestUrl, options)
+			.then((response) => response.json())
+			// eslint-disable-next-line no-console
+			.then(console.log)
+	);
+};
