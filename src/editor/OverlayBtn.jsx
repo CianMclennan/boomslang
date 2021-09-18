@@ -3,9 +3,9 @@ import React from 'react';
 import { useOverlay } from 'src/navigation/OverlayProvider.jsx';
 
 const OverlayBtn = ({ children }) => {
-	const { setOverlayContent, closeOverlay } = useOverlay();
+	const { setOverlay, closeOverlay } = useOverlay();
 	const openOverlayHandler = () => {
-		setOverlayContent(<button onClick={closeOverlay}>Close</button>);
+		setOverlay(<button onClick={closeOverlay}>Close</button>);
 	};
 	return <button onClick={openOverlayHandler}>{children}</button>;
 };

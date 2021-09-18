@@ -10,13 +10,14 @@ export const useOverlay = () => {
 };
 
 const OverlayProvider = ({ children }) => {
-	const [content, setOverlayContent] = useState(null);
+	const [overlay, setOverlay] = useState(null);
 	const closeOverlay = () => {
-		setOverlayContent(null);
+		setOverlay(null);
 	};
+
 	return (
-		<OverlayContext.Provider value={{ setOverlayContent, closeOverlay }}>
-			{!isNull(content) && <div className={'overlay fadeIn'}>{content}</div>}
+		<OverlayContext.Provider value={{ setOverlay, closeOverlay }}>
+			{!isNull(overlay) && <div className={'overlay fadeIn'}>{overlay}</div>}
 			{children}
 		</OverlayContext.Provider>
 	);
