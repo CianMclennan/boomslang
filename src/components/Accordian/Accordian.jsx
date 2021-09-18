@@ -1,13 +1,15 @@
 import './accordian.scss';
 import PropTypes from 'prop-types';
 import { useParser } from 'src/screenBuilder/ParserProvider.jsx';
-import { ACCORDIAN, CONTENT, CONTENT_HIDDEN, HEADER } from './constants.js';
 import React, { useState } from 'react';
+import classnames from 'classnames';
+
+export const CONTENT = 'accordian__content';
+export const CONTENT_HIDDEN = `${CONTENT} accordian__content--hidden`;
 
 const Accordian = ({ data, path }) => {
 	const [selected, setSelected] = useState(0);
 	const parse = useParser();
-
 	const handleHeaderClick = (index) => {
 		const newIndex = index === selected ? -1 : index;
 		setSelected(newIndex);
@@ -15,19 +17,25 @@ const Accordian = ({ data, path }) => {
 
 	const content = (data || []).map(({ title, content }, index) => {
 		const isHidden = index !== selected;
+		const contentCN = classnames('accordian__content', {
+			'accordian__content--hidden': isHidden,
+		});
 		return (
 			<section key={index}>
-				<div className={HEADER} onClick={() => handleHeaderClick(index)}>
+				<div
+					className="accordian__header"
+					onClick={() => handleHeaderClick(index)}
+				>
 					{parse({ ...title, path: `${path}/data/${index}/title` })}
 				</div>
-				<div className={`${isHidden ? CONTENT_HIDDEN : CONTENT}`}>
+				<div className={contentCN}>
 					{parse({ ...content, path: `${path}/data/${index}/content` })}
 				</div>
 			</section>
 		);
 	});
 
-	return <div className={ACCORDIAN}>{content}</div>;
+	return <div className="accordian">{content}</div>;
 };
 
 Accordian.propTypes = {

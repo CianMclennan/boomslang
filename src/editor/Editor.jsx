@@ -7,14 +7,22 @@ import defaultParser from 'src/screenBuilder/defaultParser.js';
 import editorParser from 'src/screenBuilder/editorParser.js';
 import { postScreen } from 'src/screenBuilder/fetchScreen.js';
 import { useSelector } from 'react-redux';
-import { EDITOR, EDITOR_HIDDEN, TOGGLE_EDITOR, WRAPPER } from './constants.js';
 import React, { useState } from 'react';
+import classnames from 'classnames';
+
+export const EDITOR = 'editor';
+export const EDITOR_HIDDEN = `${EDITOR} ${EDITOR}--hidden`;
 
 const Editor = () => {
 	const [isHidden, setIsHidden] = useState(false);
 	const [currentScreen, screenContent] = useSelector(({ navigation }) => {
 		const { current_screen: screen, screen_content: content } = navigation;
 		return [screen, content[screen]];
+	});
+
+	const btnText = isHidden ? 'Editor' : 'Hide';
+	const editorCN = classnames('editor', {
+		'editor--hidden': isHidden,
 	});
 
 	const test = () => {
@@ -24,14 +32,14 @@ const Editor = () => {
 	return (
 		<ParserProvider value={isHidden ? defaultParser : editorParser}>
 			<OverlayProvider>
-				<div className={WRAPPER}>
+				<div className="wrapper">
 					<button
-						className={TOGGLE_EDITOR}
+						className="toggle-editor-btn"
 						onClick={() => setIsHidden(!isHidden)}
 					>
-						{isHidden ? 'Editor' : 'Hide'}
+						{btnText}
 					</button>
-					<div className={isHidden ? EDITOR_HIDDEN : EDITOR}>
+					<div className={editorCN}>
 						<div>Current Screen: {currentScreen}</div>
 						<OverlayBtn>Overlay Btn</OverlayBtn>
 						<button onClick={test}>Save</button>
