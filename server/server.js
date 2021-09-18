@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { MongoClient } from 'mongodb';
 import express from 'express';
 import fs from 'fs';
@@ -71,10 +72,6 @@ app.post('/screen/:id', (req, res) => {
 	console.log('Body:', screenContent);
 
 	MongoClient.connect(dbURL, (error, client) => {
-		const {
-			params: { id: screenId },
-		} = req;
-
 		if (error) {
 			res.send({ ok: false, error });
 			return;
@@ -85,7 +82,7 @@ app.post('/screen/:id', (req, res) => {
 		const collection = db.collection('screens');
 		const { _id, ...content } = screenContent;
 		collection.updateOne(
-			{ _id, screen_id: screenId },
+			{ screen_id: screenId },
 			{ $set: content },
 			(err, result) => {
 				console.log('err', err);
