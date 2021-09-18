@@ -3,12 +3,12 @@ import App from 'src/App.jsx';
 import OverlayBtn from './OverlayBtn.jsx';
 import OverlayProvider from 'src/navigation/OverlayProvider.jsx';
 import ParserProvider from 'src/screenBuilder/ParserProvider.jsx';
+import classnames from 'classnames';
 import defaultParser from 'src/screenBuilder/defaultParser.js';
 import editorParser from 'src/screenBuilder/editorParser.js';
 import { postScreen } from 'src/screenBuilder/fetchScreen.js';
 import { useSelector } from 'react-redux';
 import React, { useState } from 'react';
-import classnames from 'classnames';
 
 export const EDITOR = 'editor';
 export const EDITOR_HIDDEN = `${EDITOR} ${EDITOR}--hidden`;
