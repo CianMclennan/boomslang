@@ -4,9 +4,6 @@ import classnames from 'classnames';
 import { useParser } from 'src/screenBuilder/ParserProvider.jsx';
 import React, { useState } from 'react';
 
-export const CONTENT = 'accordian__content';
-export const CONTENT_HIDDEN = `${CONTENT} accordian__content--hidden`;
-
 const Accordian = ({ data, path }) => {
 	const [selected, setSelected] = useState(0);
 	const parse = useParser();
