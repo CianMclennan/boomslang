@@ -8,6 +8,17 @@
 		height: -webkit-fill-available;
 	}
 
+	.editor-icon-btn {
+		background-image: url(../images/icons/pencil.svg);
+		border-radius: 1em;
+		border: solid 0.1em black;
+		height: 1.5em;
+		width: 1.5em;
+		background-repeat: no-repeat;
+		background-size: 70%;
+		background-position: center;
+	}
+
 	.toggle-editor-btn {
 		position: absolute;
 		right: 0em;

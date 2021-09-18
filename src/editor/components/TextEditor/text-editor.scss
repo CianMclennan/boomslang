@@ -1,0 +1,9 @@
+.text-editor-modal {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+
+	input {
+		height: 80vh;
+	}
+}
