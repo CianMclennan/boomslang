@@ -1,18 +1,12 @@
 import './placeholder.scss';
-import Overlay from 'src/shared/Overlay/Overlay.jsx';
 import PropTypes from 'prop-types';
+import React from 'react';
 import isUndefined from 'lodash/isUndefined';
 import { updateContent } from 'src/store/reducers/navigation.js';
 import { useDispatch } from 'react-redux';
-import React, { useState } from 'react';
 
 const Placeholder = ({ handleUpdate, path }) => {
-	const [overlay, setOverlay] = useState(null);
 	const dispatch = useDispatch();
-
-	const handleOverlayClose = () => {
-		setOverlay(null);
-	};
 
 	const defaultHandleUpdate = (path) => {
 		dispatch(
@@ -27,23 +21,18 @@ const Placeholder = ({ handleUpdate, path }) => {
 	};
 
 	return (
-		<>
-			<button
-				className="placeholder"
-				onClick={(event) => {
-					event.preventDefault();
-					event.stopPropagation();
-					!isUndefined(handleUpdate)
-						? handleUpdate(path)
-						: defaultHandleUpdate(path);
-				}}
-			>
-				Add
-			</button>
-			{overlay && (
-				<Overlay content={overlay} closeHandler={handleOverlayClose} />
-			)}
-		</>
+		<button
+			className="placeholder"
+			onClick={(event) => {
+				event.preventDefault();
+				event.stopPropagation();
+				!isUndefined(handleUpdate)
+					? handleUpdate(path)
+					: defaultHandleUpdate(path);
+			}}
+		>
+			Add
+		</button>
 	);
 };
 
