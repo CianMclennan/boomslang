@@ -1,19 +1,19 @@
 import App from './App.jsx';
 import OverlayProvider from 'src/navigation/OverlayProvider.jsx';
 import ParserProvider from 'src/screenBuilder/ParserProvider.jsx';
-import { Provider } from 'react-redux';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider as ReduxProvider } from 'react-redux';
 import defaultParser from 'src/screenBuilder/defaultParser.js';
 import store from './bootstrap.js';
 
 ReactDOM.render(
-	<ParserProvider value={defaultParser}>
-		<OverlayProvider>
-			<Provider store={store}>
+	<ReduxProvider store={store}>
+		<ParserProvider value={defaultParser}>
+			<OverlayProvider>
 				<App />
-			</Provider>
-		</OverlayProvider>
-	</ParserProvider>,
+			</OverlayProvider>
+		</ParserProvider>
+	</ReduxProvider>,
 	document.getElementById('root')
 );

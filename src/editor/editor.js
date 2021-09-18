@@ -1,15 +1,12 @@
 import Editor from './Editor.jsx';
-import OverlayProvider from 'src/navigation/OverlayProvider.jsx';
-import { Provider } from 'react-redux';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider as ReduxProvider } from 'react-redux';
 import store from 'src/bootstrap.js';
 
 ReactDOM.render(
-	<Provider store={store}>
-		<OverlayProvider>
-			<Editor />
-		</OverlayProvider>
-	</Provider>,
+	<ReduxProvider store={store}>
+		<Editor />
+	</ReduxProvider>,
 	document.getElementById('root')
 );

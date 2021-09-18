@@ -1,3 +1,5 @@
+@use 'src/styles/zindex';
+
 .overlay {
 	position: absolute;
 	height: 100vh;
@@ -5,6 +7,7 @@
 	background-color: rgb(30, 30, 30);
 	opacity: 0.95;
 	animation: fadeIn 0.4s;
+	z-index: zindex.$overlay;
 
 	&__buttons {
 		padding: 0.5em;

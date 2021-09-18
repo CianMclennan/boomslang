@@ -1,4 +1,3 @@
-import './overlay.scss';
 import PropTypes from 'prop-types';
 import isNull from 'lodash/isNull';
 import React, { createContext, useContext, useState } from 'react';
