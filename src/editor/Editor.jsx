@@ -10,14 +10,14 @@ import { EDITOR, EDITOR_HIDDEN, TOGGLE_EDITOR, WRAPPER } from './constants.js';
 import React, { useState } from 'react';
 
 const Editor = () => {
-	const [isHidden, setIsHidden] = useState(true);
-	const currentScreen = useSelector(({ navigation }) => {
-		const { current_screen: screen } = navigation;
-		return screen;
+	const [isHidden, setIsHidden] = useState(false);
+	const [currentScreen, screenContent] = useSelector(({ navigation }) => {
+		const { current_screen: screen, screen_content: content } = navigation;
+		return [screen, content[screen]];
 	});
 
 	const test = () => {
-		postScreen();
+		postScreen(currentScreen, screenContent);
 	};
 
 	return (

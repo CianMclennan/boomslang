@@ -16,7 +16,7 @@ const OverlayProvider = ({ children }) => {
 	};
 	return (
 		<OverlayContext.Provider value={{ setOverlayContent, closeOverlay }}>
-			{!isNull(content) ? <div className={'overlay'}>{content}</div> : <></>}
+			{!isNull(content) && <div className={'overlay fadeIn'}>{content}</div>}
 			{children}
 		</OverlayContext.Provider>
 	);

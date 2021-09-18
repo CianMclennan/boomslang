@@ -18,6 +18,7 @@ if (fs.existsSync(staticFiles)) {
 	app.use(express.static(staticFiles));
 	serveStatic = true;
 }
+app.use(express.json());
 app.use((req, res, next) => {
 	res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
 	res.header(
@@ -64,11 +65,40 @@ app.get('/screen/:id', (req, res) => {
 app.post('/screen/:id', (req, res) => {
 	const {
 		params: { id: screenId },
-		body,
+		body: screenContent,
 	} = req;
 	console.log('Update:', screenId);
-	console.log('Body:', body);
-	res.send({ ok: true });
+	console.log('Body:', screenContent);
+
+	MongoClient.connect(dbURL, (error, client) => {
+		const {
+			params: { id: screenId },
+		} = req;
+
+		if (error) {
+			res.send({ ok: false, error });
+			return;
+		}
+
+		const db = client.db(dbName);
+
+		const collection = db.collection('screens');
+		const { _id, ...content } = screenContent;
+		collection.updateOne(
+			{ _id, screen_id: screenId },
+			{ $set: content },
+			(err, result) => {
+				console.log('err', err);
+				console.log('result', result);
+				if (err) {
+					res.send({ ok: false, ...err });
+				} else {
+					res.send({ ok: true, ...result });
+				}
+			}
+		);
+		client.close();
+	});
 });
 
 app.ws('/', (socket) => {

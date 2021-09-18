@@ -26,7 +26,7 @@ export const fetchScreen = (screenId) => {
 		});
 };
 
-export const postScreen = (screenId = 'test') => {
+export const postScreen = (screenId = 'test', content) => {
 	const headers = new Headers({
 		'Content-Type': 'application/json',
 	});
@@ -36,7 +36,7 @@ export const postScreen = (screenId = 'test') => {
 		method: 'POST',
 		mode: 'cors',
 		cache: 'default',
-		body: JSON.stringify({ test: 'hi' }),
+		body: JSON.stringify(content),
 	};
 
 	return (
