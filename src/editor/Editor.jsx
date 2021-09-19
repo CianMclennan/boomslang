@@ -1,6 +1,5 @@
 import './editor.scss';
 import App from 'src/App.jsx';
-import OverlayBtn from './OverlayBtn.jsx';
 import OverlayProvider from 'src/navigation/OverlayProvider.jsx';
 import ParserProvider from 'src/screenBuilder/ParserProvider.jsx';
 import classnames from 'classnames';
@@ -41,7 +40,6 @@ const Editor = () => {
 					</button>
 					<div className={editorCN}>
 						<div>Current Screen: {currentScreen}</div>
-						<OverlayBtn>Overlay Btn</OverlayBtn>
 						<button onClick={test}>Save</button>
 					</div>
 					<App />

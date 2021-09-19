@@ -8,15 +8,19 @@ import { useOverlay } from 'src/navigation/OverlayProvider.jsx';
 const TextEditor = ({ text, path }) => {
 	const { setOverlay } = useOverlay();
 	const onEditBtn = (event) => {
+		event.preventDefault();
 		event.stopPropagation();
 		setOverlay(<TextEditorModal text={text} path={path} />);
 	};
 
 	return (
-		<>
+		<div className="text-editor">
 			<Text text={text} />
-			<button className="editor-icon-btn" onClick={onEditBtn} />
-		</>
+			<button
+				className="editor-icon-btn editor-icon-btn__edit"
+				onClick={onEditBtn}
+			/>
+		</div>
 	);
 };
 

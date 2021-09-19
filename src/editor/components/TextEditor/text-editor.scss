@@ -1,9 +1,17 @@
+.text-editor {
+	&:hover {
+		outline: dotted 1px;
+	}
+}
+
 .text-editor-modal {
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
+	align-items: center;
 
-	input {
+	&__text-field {
 		height: 80vh;
+		width: 80vw;
 	}
 }

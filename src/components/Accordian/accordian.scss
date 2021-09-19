@@ -3,6 +3,12 @@
 		background-color: sandybrown;
 		padding: 0.3em;
 		font-size: 1.2rem;
+		display: flex;
+
+		.editor-icon-btn__delete {
+			position: absolute;
+			right: 0;
+		}
 	}
 
 	&__content {

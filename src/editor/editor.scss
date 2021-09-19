@@ -9,7 +9,6 @@
 	}
 
 	.editor-icon-btn {
-		background-image: url(../images/icons/pencil.svg);
 		border-radius: 1em;
 		border: solid 0.1em black;
 		height: 1.5em;
@@ -17,6 +16,14 @@
 		background-repeat: no-repeat;
 		background-size: 70%;
 		background-position: center;
+
+		&__edit {
+			background-image: url(../images/icons/pencil.svg);
+		}
+
+		&__delete {
+			background-image: url(../images/icons/close.svg);
+		}
 	}
 
 	.toggle-editor-btn {

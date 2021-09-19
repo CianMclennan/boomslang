@@ -14,10 +14,19 @@ const AccordianEditor = ({ data, path }) => {
 			updateContent({ path: `${path}/data`, content: [...data, template] })
 		);
 	};
+	const deleteHandler = (event, index = false) => {
+		event.preventDefault();
+		event.stopPropagation();
+		let _data = [...data];
+		if (index) {
+			_data.splice(index, 1);
+		}
+		dispatch(updateContent({ path: `${path}/data`, content: [..._data] }));
+	};
 
 	return (
 		<>
-			<Accordian data={data} path={path} />
+			<Accordian data={data} path={path} deleteHandler={deleteHandler} />
 			<Placeholder handleUpdate={handleUpdate} />
 		</>
 	);

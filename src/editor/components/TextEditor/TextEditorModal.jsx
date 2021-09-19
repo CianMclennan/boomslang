@@ -18,12 +18,17 @@ const TextEditor = ({ text, path }) => {
 	};
 
 	return (
-		<div style={{ color: 'white' }}>
+		<>
 			<button onClick={closeOverlay}>Close</button>
 			<div className="text-editor-modal">
-				<input type="text" value={textValue} onChange={handleTextChange} />
+				<input
+					className="text-editor-modal__text-field"
+					type="text"
+					value={textValue}
+					onChange={handleTextChange}
+				/>
 			</div>
-		</div>
+		</>
 	);
 };
 
