@@ -1,9 +1,4 @@
 html,
 #root {
-	height: 100vh;
-
-	// iPhone
-	@media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
-		height: -webkit-fill-available;
-	}
+	height: 100%;
 }
