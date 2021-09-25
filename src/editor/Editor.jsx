@@ -33,14 +33,16 @@ const Editor = () => {
 			<OverlayProvider>
 				<div className="wrapper">
 					<button
-						className="toggle-editor-btn"
+						className="editor__button editor__button__toggle"
 						onClick={() => setIsHidden(!isHidden)}
 					>
 						{btnText}
 					</button>
 					<div className={editorCN}>
 						<div>Current Screen: {currentScreen}</div>
-						<button onClick={test}>Save</button>
+						<button className="editor__button" onClick={test}>
+							Save
+						</button>
 					</div>
 					<App />
 				</div>

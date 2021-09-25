@@ -21,11 +21,6 @@
 		}
 	}
 
-	.toggle-editor-btn {
-		position: absolute;
-		right: 0em;
-	}
-
 	.editor {
 		background-color: white;
 		overflow: hidden;
@@ -39,6 +34,17 @@
 
 		& * {
 			margin-left: 1em;
+		}
+
+		&__button {
+			background-color: transparent;
+			border: solid 1px;
+
+			&__toggle {
+				background-color: white;
+				position: absolute;
+				right: 0em;
+			}
 		}
 	}
 }
