@@ -42,7 +42,8 @@ const slice = createSlice({
 				goNext(rule.next);
 			} else {
 				let index = screens.indexOf(current_screen);
-				if (index === -1 || !screens.length) return;
+				if (index === -1) return;
+				// to prevent going above the max number of screens.
 				if (++index < screens.length) {
 					goNext(screens[index]);
 				}
@@ -60,7 +61,8 @@ const slice = createSlice({
 				goNext(rule.prev);
 			} else {
 				let index = screens.indexOf(current_screen);
-				if (index === -1 || !screens.length) return;
+				if (index === -1) return;
+				// to prevent going bellow index 0.
 				if (--index >= 0) {
 					goNext(screens[index]);
 				}

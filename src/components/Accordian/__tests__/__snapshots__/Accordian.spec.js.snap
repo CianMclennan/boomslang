@@ -24,9 +24,7 @@ exports[`Accordian Component: should display delete button when passed a "delete
         <div
           class="accordian__content"
         >
-          <span
-            style="font-size: 2rem;"
-          >
+          <span>
             Nibh inceptos amet laoreet lobortis facilisi sapien sit varius interdum
           </span>
         </div>

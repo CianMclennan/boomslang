@@ -3,7 +3,7 @@ import { AccordianData } from 'src/__mocks__/mockData.js';
 import ParserProvider from 'src/screenBuilder/ParserProvider.jsx';
 import defaultParser from 'src/screenBuilder/defaultParser.js';
 import React, { Suspense } from 'react';
-import { fireEvent, render, waitFor } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 
 const renderAccodian = (data, deleteHandler) =>
 	render(

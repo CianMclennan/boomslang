@@ -3,6 +3,9 @@ export const AccordianData = [
 		title: {
 			component: 'Text',
 			text: 'title1',
+			style: {
+				fontSize: '2rem',
+			},
 		},
 		content: {
 			component: 'Text',
