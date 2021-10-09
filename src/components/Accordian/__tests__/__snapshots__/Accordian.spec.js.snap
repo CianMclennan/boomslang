@@ -1,0 +1,86 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Accordian Component: should display delete button when passed a "deleteHandler" 1`] = `
+<div>
+  <div
+    data-testid="test-id"
+  >
+    <div
+      class="accordian"
+    >
+      <section>
+        <div
+          class="accordian__header"
+        >
+          <span
+            style="font-size: 2rem;"
+          >
+            title1
+          </span>
+          <button
+            class="editor-icon-btn editor-icon-btn__delete"
+          />
+        </div>
+        <div
+          class="accordian__content"
+        >
+          <span
+            style="font-size: 2rem;"
+          >
+            Nibh inceptos amet laoreet lobortis facilisi sapien sit varius interdum
+          </span>
+        </div>
+      </section>
+      <section>
+        <div
+          class="accordian__header"
+        >
+          title2
+          <button
+            class="editor-icon-btn editor-icon-btn__delete"
+          />
+        </div>
+        <div
+          class="accordian__content accordian__content--hidden"
+        >
+          PraesentAliquam turpis viverra sem aenean neque orci amet dolor porta
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Accordian Component: should render 1`] = `
+<div>
+  <div
+    data-testid="test-id"
+  >
+    <div
+      class="accordian"
+      style="display: none;"
+    >
+      <section>
+        <div
+          class="accordian__header"
+        />
+        <div
+          class="accordian__content"
+        />
+      </section>
+      <section>
+        <div
+          class="accordian__header"
+        >
+          title2
+        </div>
+        <div
+          class="accordian__content accordian__content--hidden"
+        >
+          PraesentAliquam turpis viverra sem aenean neque orci amet dolor porta
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+`;

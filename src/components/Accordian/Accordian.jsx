@@ -25,7 +25,9 @@ const Accordian = ({ data, path, deleteHandler }) => {
 					className="accordian__header"
 					onClick={() => handleHeaderClick(index)}
 				>
-					{parse({ ...title, path: `${path}/data/${index}/title` })}
+					{typeof title === 'object'
+						? parse({ ...title, path: `${path}/data/${index}/title` })
+						: title}
 					{shouldShowDeleteBtn && (
 						<button
 							className="editor-icon-btn editor-icon-btn__delete"
@@ -34,7 +36,9 @@ const Accordian = ({ data, path, deleteHandler }) => {
 					)}
 				</div>
 				<div className={contentCN}>
-					{parse({ ...content, path: `${path}/data/${index}/content` })}
+					{typeof content === 'object'
+						? parse({ ...content, path: `${path}/data/${index}/content` })
+						: content}
 				</div>
 			</section>
 		);

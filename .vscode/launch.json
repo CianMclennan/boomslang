@@ -6,7 +6,7 @@
 			"request": "launch",
 			"name": "Editor Server",
 			"skipFiles": ["<node_internals>/**"],
-			"console": "integratedTerminal",
+			"console": "internalConsole",
 			"args": ["-r", "esm", "${workspaceFolder}/server/server.js"]
 		}
 	]

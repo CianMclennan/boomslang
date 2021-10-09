@@ -9,7 +9,7 @@ const loadedComponents = new Set();
 
 const createParser = (components = {}, isEditor = false) => {
 	const parse = (obj) => {
-		if (!obj) return obj;
+		if (!(typeof obj === 'object')) return obj;
 		const {
 			screen_id: screenId,
 			path: parentPath,

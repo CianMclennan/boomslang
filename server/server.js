@@ -55,7 +55,6 @@ app.get('/screen/:id', (req, res) => {
 				res.send({ ok: false, error });
 				return;
 			}
-			console.log('screens:', screens.length);
 			const [screen] = screens;
 			res.send({ ok: true, screen });
 		});
@@ -68,8 +67,6 @@ app.post('/screen/:id', (req, res) => {
 		params: { id: screenId },
 		body: screenContent,
 	} = req;
-	console.log('Update:', screenId);
-	console.log('Body:', screenContent);
 
 	MongoClient.connect(dbURL, (error, client) => {
 		if (error) {
@@ -85,8 +82,6 @@ app.post('/screen/:id', (req, res) => {
 			{ screen_id: screenId },
 			{ $set: content },
 			(err, result) => {
-				console.log('err', err);
-				console.log('result', result);
 				if (err) {
 					res.send({ ok: false, ...err });
 				} else {
