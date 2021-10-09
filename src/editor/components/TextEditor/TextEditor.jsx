@@ -5,7 +5,7 @@ import Text from 'src/components/Text/Text.jsx';
 import TextEditorModal from './TextEditorModal.jsx';
 import { useOverlay } from 'src/navigation/OverlayProvider.jsx';
 
-const TextEditor = ({ text, path }) => {
+const TextEditor = ({ path, text, style }) => {
 	const { setOverlay } = useOverlay();
 	const onEditBtn = (event) => {
 		event.preventDefault();
@@ -15,7 +15,7 @@ const TextEditor = ({ text, path }) => {
 
 	return (
 		<div className="text-editor">
-			<Text text={text} />
+			<Text text={text} style={style} />
 			<button
 				className="editor-icon-btn editor-icon-btn__edit"
 				onClick={onEditBtn}
@@ -27,6 +27,7 @@ const TextEditor = ({ text, path }) => {
 TextEditor.propTypes = {
 	text: PropTypes.string,
 	path: PropTypes.string,
+	style: PropTypes.object,
 };
 
 export default TextEditor;

@@ -1,3 +1,44 @@
+$btn-height: 1.2em;
+$button-color: blueviolet;
+$animation-time: 0.3s;
+
 .placeholder {
-	width: 100%;
+	cursor: pointer;
+	display: flex;
+	color: white;
+	line-height: $btn-height;
+	font-size: $btn-height;
+	transition: background-color $animation-time;
+
+	&__cirlce {
+		display: flex;
+		justify-content: center;
+		height: $btn-height;
+		aspect-ratio: 1;
+		border-radius: 50%;
+		background-color: $button-color;
+		transition: border-radius $animation-time;
+		margin: auto 0;
+	}
+
+	&__bar {
+		height: calc($btn-height/8);
+		width: 100%;
+		background-color: $button-color;
+		margin: auto 0.1em;
+		transition: height $animation-time, margin $animation-time;
+	}
+
+	&:hover {
+		background-color: $button-color;
+	}
+
+	&:hover > &__cirlce {
+		border-radius: 0;
+	}
+
+	&:hover > &__bar {
+		height: $btn-height;
+		margin: auto 0;
+	}
 }
