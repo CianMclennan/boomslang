@@ -43,7 +43,7 @@ app.get('/screen/:id', (req, res) => {
 		} = req;
 
 		if (error) {
-			res.status(404).send({ ok: false, error });
+			res.status(503).send({ ok: false, error });
 			return;
 		}
 
