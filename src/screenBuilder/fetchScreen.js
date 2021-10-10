@@ -33,7 +33,7 @@ export const postScreen = (screenId = 'test', content) => {
 	const requestUrl = `${url}/screen/${screenId}`;
 	const options = {
 		headers,
-		method: 'POST',
+		method: 'PUT',
 		mode: 'cors',
 		cache: 'default',
 		body: JSON.stringify(content),

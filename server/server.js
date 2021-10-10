@@ -62,7 +62,7 @@ app.get('/screen/:id', (req, res) => {
 	});
 });
 
-app.post('/screen/:id', (req, res) => {
+app.put('/screen/:id', (req, res) => {
 	const {
 		params: { id: screenId },
 		body: screenContent,
