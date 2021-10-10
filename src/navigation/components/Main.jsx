@@ -1,5 +1,5 @@
 import Screen from './Screen.jsx';
-import { fetchScreen } from 'src/screenBuilder/fetchScreen.js';
+import { fetchScreen } from 'src/screenBuilder/httpInterface.js';
 import gsap from 'gsap';
 import isUndefined from 'lodash/isUndefined';
 import { screenContentAdded } from 'src/store/reducers/navigation.js';

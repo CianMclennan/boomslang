@@ -6,4 +6,5 @@ export default {
 	start_screen: 'screen_3',
 	editor_domain: 'localhost',
 	editor_port: 3001,
+	show_maintenance_message: false,
 };

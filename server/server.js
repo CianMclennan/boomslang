@@ -43,7 +43,7 @@ app.get('/screen/:id', (req, res) => {
 		} = req;
 
 		if (error) {
-			res.send({ ok: false, error });
+			res.status(404).send({ ok: false, error });
 			return;
 		}
 
@@ -52,17 +52,17 @@ app.get('/screen/:id', (req, res) => {
 		const collection = db.collection('screens');
 		collection.find({ screen_id: screenId }).toArray((error, screens) => {
 			if (error || !screens.length) {
-				res.send({ ok: false, error });
+				res.status(404).send({ ok: false, error });
 				return;
 			}
-			const [screen] = screens;
-			res.send({ ok: true, screen });
+			const [content] = screens;
+			res.send({ ok: true, content });
 		});
 		client.close();
 	});
 });
 
-app.put('/screen/:id', (req, res) => {
+app.post('/screen/:id', (req, res) => {
 	const {
 		params: { id: screenId },
 		body: screenContent,

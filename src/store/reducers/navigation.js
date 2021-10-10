@@ -8,6 +8,7 @@ const slice = createSlice({
 		current_screen: '',
 		transition_direction: '',
 		screen_content: {},
+		invalid_screen_content: [],
 	},
 	reducers: {
 		screenAdded: (navigation, { payload: { name } }) => {
@@ -18,6 +19,10 @@ const slice = createSlice({
 			navigation.transition_direction = direction;
 		},
 		screenContentAdded: (navigation, { payload: { screenId, content } }) => {
+			const index = navigation.invalid_screen_content.indexOf(screenId);
+			if (index >= 0) {
+				navigation.invalid_screen_content.splice(index, 1);
+			}
 			navigation.screen_content[screenId] = content;
 		},
 		updateContent: (navigation, { payload: { path, content } }) => {
@@ -29,6 +34,11 @@ const slice = createSlice({
 			}
 			const [attr] = pathArr;
 			reference[attr] = content;
+		},
+		screenContentInvalidated: (navigation, { payload: { screenId } }) => {
+			if (!navigation.invalid_screen_content.includes(screenId)) {
+				navigation.invalid_screen_content.push(screenId);
+			}
 		},
 		nextScreen: (navigation) => {
 			const { screens, current_screen } = navigation;
@@ -75,6 +85,7 @@ export const {
 	screenAdded,
 	currentScreenSet,
 	screenContentAdded,
+	screenContentInvalidated,
 	updateContent,
 	nextScreen,
 	prevScreen,

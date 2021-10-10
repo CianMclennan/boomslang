@@ -5,9 +5,10 @@ import ParserProvider from 'src/screenBuilder/ParserProvider.jsx';
 import classnames from 'classnames';
 import defaultParser from 'src/screenBuilder/defaultParser.js';
 import editorParser from 'src/screenBuilder/editorParser.js';
-import { postScreen } from 'src/screenBuilder/fetchScreen.js';
+import { postScreen } from 'src/screenBuilder/httpInterface.js';
 import { useSelector } from 'react-redux';
-import React, { useState } from 'react';
+import React, { Suspense, useState } from 'react';
+const MaintenanceScreen = React.lazy(() => import('./MaintenanceScreen'));
 
 export const EDITOR = 'editor';
 export const EDITOR_HIDDEN = `${EDITOR} ${EDITOR}--hidden`;
@@ -18,6 +19,10 @@ const Editor = () => {
 		const { current_screen: screen, screen_content: content } = navigation;
 		return [screen, content[screen]];
 	});
+	const shouldShowMaintenance = useSelector(
+		({ settings: { show_maintenance_message = false } }) =>
+			show_maintenance_message
+	);
 
 	const btnText = isHidden ? 'Editor' : 'Hide';
 	const editorCN = classnames('editor', {
@@ -28,7 +33,11 @@ const Editor = () => {
 		postScreen(currentScreen, screenContent);
 	};
 
-	return (
+	return shouldShowMaintenance ? (
+		<Suspense fallback={<></>}>
+			<MaintenanceScreen />
+		</Suspense>
+	) : (
 		<ParserProvider value={isHidden ? defaultParser : editorParser}>
 			<OverlayProvider>
 				<div className="wrapper">

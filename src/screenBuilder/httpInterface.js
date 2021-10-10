@@ -13,17 +13,17 @@ export const fetchScreen = (screenId) => {
 	});
 
 	return fetch(request)
-		.then((response) => response.json())
-		.then(({ ok, screen, error }) => {
-			if (ok) {
-				return screen;
-			}
-			let msg = `Failed to load ${screenId}`;
-			if (error) {
-				msg += ` - ${JSON.stringify(error)}`;
-			}
-			return msg;
-		});
+		.then((response) => {
+			const { status } = response;
+
+			return response.json().then((res) => Promise.resolve({ ...res, status }));
+		})
+		.catch(() =>
+			Promise.resolve({
+				ok: false,
+				error: 'Boomslang Server Unreachable',
+			})
+		);
 };
 
 export const postScreen = (screenId = 'test', content) => {
@@ -33,7 +33,7 @@ export const postScreen = (screenId = 'test', content) => {
 	const requestUrl = `${url}/screen/${screenId}`;
 	const options = {
 		headers,
-		method: 'PUT',
+		method: 'POST',
 		mode: 'cors',
 		cache: 'default',
 		body: JSON.stringify(content),
