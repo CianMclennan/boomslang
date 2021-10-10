@@ -1,5 +1,6 @@
 $btn-height: 1.2em;
-$button-color: blueviolet;
+$button-color: #999;
+$alt-button-color: #8a2be2;
 $animation-time: 0.3s;
 
 .placeholder {
@@ -17,8 +18,8 @@ $animation-time: 0.3s;
 		aspect-ratio: 1;
 		border-radius: 50%;
 		background-color: $button-color;
-		transition: border-radius $animation-time;
 		margin: auto 0;
+		transition: border-radius $animation-time, background-color $animation-time;
 	}
 
 	&__bar {
@@ -26,19 +27,22 @@ $animation-time: 0.3s;
 		width: 100%;
 		background-color: $button-color;
 		margin: auto 0.1em;
-		transition: height $animation-time, margin $animation-time;
+		transition: height $animation-time, margin $animation-time,
+			background-color $animation-time;
 	}
 
 	&:hover {
-		background-color: $button-color;
+		background-color: $alt-button-color;
 	}
 
 	&:hover > &__cirlce {
 		border-radius: 0;
+		background-color: $alt-button-color;
 	}
 
 	&:hover > &__bar {
 		height: $btn-height;
 		margin: auto 0;
+		background-color: $alt-button-color;
 	}
 }
