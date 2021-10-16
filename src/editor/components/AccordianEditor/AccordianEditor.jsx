@@ -2,8 +2,8 @@ import Accordian from 'src/components/Accordian/Accordian.jsx';
 import Placeholder from 'src/editor/components/Placeholder/Placeholder.jsx';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { contentUpdated } from 'src/store/reducers/navigation.js';
 import template from './AccordianTemplate.js';
-import { updateContent } from 'src/store/reducers/navigation.js';
 import { useDispatch } from 'react-redux';
 
 const AccordianEditor = ({ data, path }) => {
@@ -11,7 +11,7 @@ const AccordianEditor = ({ data, path }) => {
 
 	const handleUpdate = () => {
 		dispatch(
-			updateContent({ path: `${path}/data`, content: [...data, template] })
+			contentUpdated({ path: `${path}/data`, content: [...data, template] })
 		);
 	};
 	const deleteHandler = (event, index = false) => {
@@ -21,7 +21,7 @@ const AccordianEditor = ({ data, path }) => {
 		if (index) {
 			_data.splice(index, 1);
 		}
-		dispatch(updateContent({ path: `${path}/data`, content: [..._data] }));
+		dispatch(contentUpdated({ path: `${path}/data`, content: [..._data] }));
 	};
 
 	return (

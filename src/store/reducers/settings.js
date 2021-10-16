@@ -5,14 +5,24 @@ const slice = createSlice({
 	name: 'settings',
 	initialState: settings,
 	reducers: {
-		updateSettings: (settings, action) => {
+		settingsUpdated: (settings, action) => {
 			Object.keys(action.payload).forEach(
 				(key) => (settings[key] = action.payload[key])
 			);
 		},
+		titleUpdated: (settings, { payload: title = '' }) => {
+			settings.title = title;
+		},
+		maintenanceMessageDisplayed: (
+			settings,
+			{ payload: showMessage = true }
+		) => {
+			settings.show_maintenance_message = showMessage;
+		},
 	},
 });
 
-export const { updateSettings } = slice.actions;
+export const { settingsUpdated, titleUpdated, maintenanceMessageDisplayed } =
+	slice.actions;
 
 export default slice.reducer;

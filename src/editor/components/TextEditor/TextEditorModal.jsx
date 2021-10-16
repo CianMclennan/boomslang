@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import PropTypes from 'prop-types';
-import { updateContent } from 'src/store/reducers/navigation.js';
+import { contentUpdated } from 'src/store/reducers/navigation.js';
 import { useDispatch } from 'react-redux';
 import { useOverlay } from 'src/navigation/OverlayProvider.jsx';
 import React, { useState } from 'react';
@@ -13,7 +13,7 @@ const TextEditor = ({ text, path }) => {
 	const handleTextChange = ({ target: { value } }) => {
 		setTextValue(value);
 		dispatch(
-			updateContent({ path, content: { component: 'Text', text: value } })
+			contentUpdated({ path, content: { component: 'Text', text: value } })
 		);
 	};
 

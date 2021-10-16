@@ -1,7 +1,7 @@
 import Screen from './Screen.jsx';
 import { fetchScreen } from 'src/screenBuilder/httpInterface.js';
 import isUndefined from 'lodash/isUndefined';
-import { updateSettings } from 'src/store/reducers/settings.js';
+import { maintenanceMessageDisplayed } from 'src/store/reducers/settings.js';
 import React, { useEffect, useState } from 'react';
 import { SCREEN, SLIDER } from '../constants.js';
 import {
@@ -34,8 +34,7 @@ const Main = () => {
 
 	useEffect(() => {
 		if ((!contentIsLoaded || contentIsInvalid) && !requestIsSent) {
-			const newSentRequests = [...sentRequests, screenId];
-			updateSentRequests(newSentRequests);
+			updateSentRequests([...sentRequests, screenId]);
 			fetchScreen(screenId).then((response) => {
 				const { ok, content, error, status } = response;
 				updateSentRequests((requests) => {
@@ -48,7 +47,7 @@ const Main = () => {
 				if (ok) {
 					dispatch(screenContentAdded({ screenId, content }));
 				} else {
-					console.error('Error:', error);
+					console.error('Error:', error.name ?? error);
 					switch (status) {
 					case 503:
 					case 404:
@@ -58,11 +57,11 @@ const Main = () => {
 								content: `404: Content was not found for ${screenId}`,
 							})
 						);
-						dispatch(screenContentInvalidated({ screenId }));
+						dispatch(screenContentInvalidated(screenId));
 						break;
 					default:
-						dispatch(updateSettings({ show_maintenance_message: true }));
-						dispatch(screenContentInvalidated({ screenId }));
+						dispatch(maintenanceMessageDisplayed());
+						dispatch(screenContentInvalidated(screenId));
 						break;
 					}
 				}

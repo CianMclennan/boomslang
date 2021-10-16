@@ -11,8 +11,11 @@ const slice = createSlice({
 		invalid_screen_content: [],
 	},
 	reducers: {
-		screenAdded: (navigation, { payload: { name } }) => {
-			navigation.screens.push(name);
+		allScreensAdded: (navigation, { payload: screens }) => {
+			navigation.screens = screens;
+		},
+		screenAdded: (navigation, { payload: screenName }) => {
+			navigation.screens.push(screenName);
 		},
 		currentScreenSet: (navigation, { payload: { screen, direction } }) => {
 			navigation.current_screen = screen;
@@ -25,7 +28,7 @@ const slice = createSlice({
 			}
 			navigation.screen_content[screenId] = content;
 		},
-		updateContent: (navigation, { payload: { path, content } }) => {
+		contentUpdated: (navigation, { payload: { path, content } }) => {
 			const pathArr = path.split('/');
 			let reference = navigation.screen_content;
 			while (pathArr.length > 1) {
@@ -35,7 +38,7 @@ const slice = createSlice({
 			const [attr] = pathArr;
 			reference[attr] = content;
 		},
-		screenContentInvalidated: (navigation, { payload: { screenId } }) => {
+		screenContentInvalidated: (navigation, { payload: screenId }) => {
 			if (!navigation.invalid_screen_content.includes(screenId)) {
 				navigation.invalid_screen_content.push(screenId);
 			}
@@ -82,11 +85,12 @@ const slice = createSlice({
 });
 
 export const {
+	allScreensAdded,
 	screenAdded,
 	currentScreenSet,
 	screenContentAdded,
 	screenContentInvalidated,
-	updateContent,
+	contentUpdated,
 	nextScreen,
 	prevScreen,
 } = slice.actions;
