@@ -4,7 +4,11 @@ import { useParser } from 'src/screenBuilder/ParserProvider.jsx';
 
 const Layout = ({ child, style, path }) => {
 	const parse = useParser();
-	return <div style={style}>{parse({ ...child, path: `${path}/child` })}</div>;
+	return (
+		<div className="layout" style={style}>
+			{parse({ ...child, path: `${path}/child` })}
+		</div>
+	);
 };
 
 Layout.propTypes = {

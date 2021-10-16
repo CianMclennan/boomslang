@@ -16,10 +16,7 @@ const TextEditor = ({ path, text, style }) => {
 	return (
 		<div className="text-editor">
 			<Text text={text} style={style} />
-			<button
-				className="editor-icon-btn editor-icon-btn__edit"
-				onClick={onEditBtn}
-			/>
+			<button className="editor-icon-btn__edit" onClick={onEditBtn} />
 		</div>
 	);
 };

@@ -1,22 +1,32 @@
+@mixin editor-icon-btn {
+	border-radius: 1em;
+	border: solid 0.1em black;
+	height: 2em;
+	width: 2em;
+	background-repeat: no-repeat;
+	background-size: 70%;
+	background-position: center;
+	display: block;
+}
+
+@mixin editor-btn {
+	background-color: white;
+	border: solid 1px;
+}
+
 .wrapper {
 	height: 100%;
 	display: flex;
 	flex-direction: column;
 
 	.editor-icon-btn {
-		border-radius: 1em;
-		border: solid 0.1em black;
-		height: 2em;
-		width: 2em;
-		background-repeat: no-repeat;
-		background-size: 70%;
-		background-position: center;
-
 		&__edit {
+			@include editor-icon-btn;
 			background-image: url(../images/icons/pencil.svg);
 		}
 
 		&__delete {
+			@include editor-icon-btn;
 			background-image: url(../images/icons/close.svg);
 		}
 	}
@@ -37,11 +47,10 @@
 		}
 
 		&__button {
-			background-color: transparent;
-			border: solid 1px;
+			@include editor-btn;
 
 			&__toggle {
-				background-color: white;
+				@include editor-btn;
 				position: absolute;
 				right: 0em;
 			}

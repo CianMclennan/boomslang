@@ -18,7 +18,7 @@ exports[`Accordian Component: should display delete button when passed a "delete
             title1
           </span>
           <button
-            class="editor-icon-btn editor-icon-btn__delete"
+            class="editor-icon-btn__delete"
           />
         </div>
         <div
@@ -35,7 +35,7 @@ exports[`Accordian Component: should display delete button when passed a "delete
         >
           title2
           <button
-            class="editor-icon-btn editor-icon-btn__delete"
+            class="editor-icon-btn__delete"
           />
         </div>
         <div

@@ -30,7 +30,7 @@ const Accordian = ({ data, path, deleteHandler }) => {
 						: title}
 					{shouldShowDeleteBtn && (
 						<button
-							className="editor-icon-btn editor-icon-btn__delete"
+							className="editor-icon-btn__delete"
 							onClick={(e) => deleteHandler(e, index)}
 						/>
 					)}

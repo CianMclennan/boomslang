@@ -21,6 +21,13 @@ describe('Accordian Component:', () => {
 		const { container } = renderAccodian(AccordianData);
 		expect(container).toMatchSnapshot();
 	});
+	it('should not display delete button when not passed a "deleteHandler"', () => {
+		const { getByTestId } = renderAccodian(AccordianData);
+		const deleteBtns = getByTestId('test-id').getElementsByClassName(
+			'editor-icon-btn__delete'
+		);
+		expect(deleteBtns.length).toBe(0);
+	});
 	it('should display delete button when passed a "deleteHandler"', () => {
 		let deletedIndex = null;
 		const deleteHandler = jest.fn((e, i) => {

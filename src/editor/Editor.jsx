@@ -42,7 +42,7 @@ const Editor = () => {
 			<OverlayProvider>
 				<div className="wrapper">
 					<button
-						className="editor__button editor__button__toggle"
+						className="editor__button__toggle"
 						onClick={() => setIsHidden(!isHidden)}
 					>
 						{btnText}
