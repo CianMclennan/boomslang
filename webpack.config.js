@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 const path = require('path');
 const settings = require('./build-settings');
 const HtmlWebpackPlugin = require('html-webpack-plugin');

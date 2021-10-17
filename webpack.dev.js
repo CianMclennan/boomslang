@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 const config = require('./webpack.config');
 
 module.exports = (env) => {
