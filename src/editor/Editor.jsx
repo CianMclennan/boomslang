@@ -1,5 +1,6 @@
 import './editor.scss';
 import App from 'src/App.jsx';
+import NewScreenButton from './components/NewScreenEditor/NewScreenButton.jsx';
 import OverlayProvider from 'src/navigation/OverlayProvider.jsx';
 import ParserProvider from 'src/screenBuilder/ParserProvider.jsx';
 import classnames from 'classnames';
@@ -29,9 +30,7 @@ const Editor = () => {
 		'editor--hidden': isHidden,
 	});
 
-	const test = () => {
-		postScreen(currentScreen, screenContent);
-	};
+	const handleSave = () => postScreen(currentScreen, screenContent);
 
 	return shouldShowMaintenance ? (
 		<Suspense fallback={<></>}>
@@ -49,9 +48,10 @@ const Editor = () => {
 					</button>
 					<div className={editorCN}>
 						<div>Current Screen: {currentScreen}</div>
-						<button className="editor__button" onClick={test}>
+						<button className="editor__button" onClick={handleSave}>
 							Save
 						</button>
+						<NewScreenButton />
 					</div>
 					<App />
 				</div>

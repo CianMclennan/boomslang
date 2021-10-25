@@ -6,7 +6,6 @@ const TextEditor = React.lazy(() => import('./TextEditor/TextEditor.jsx'));
 const AccordianEditor = React.lazy(() =>
 	import('./AccordianEditor/AccordianEditor.jsx')
 );
-
 export default {
 	...components,
 	TextEditor,
