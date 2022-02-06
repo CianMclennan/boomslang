@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  frontend: 
+    build: ./frontend
+    ports:
+      - 8080:8080
+    environment:
+      API_URL: http://backend/boomslang
+    volumes:
+      - ./frontend:/app
+
+  backend:
+    build: ./backend
+    ports:
+      - 3001:3001
+    environment:
+      DB_URL: mongodb://db/boomslang
+    volumes:
+      - ./backend:/app
+
+  mongo-db:
+    image: mongo:4.0-xenial
+    ports:
+      - 27017:27017
+    volumes:
+      - boomslang:/data/db
+      
+volumes:
+  boomslang:

@@ -3,12 +3,12 @@ import { MongoClient } from 'mongodb';
 import express from 'express';
 import fs from 'fs';
 import path from 'path';
-import settings from '../src/settings.js';
+// import settings from '../src/settings.js';
 import ws from 'express-ws';
 
 const app = express();
-const { editor_port: port } = settings;
-
+// const { editor_port: port } = settings;
+const port = 3001;
 const dbURL = 'mongodb://localhost:27017';
 const dbName = 'boomslang';
 ws(app);
