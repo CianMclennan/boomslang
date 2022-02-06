@@ -1,9 +1,13 @@
-FROM node:14-alpine3.12
+FROM node:14.16.0-alpine3.13
+
 RUN addgroup app && adduser -S -G app app
 USER app
+
 WORKDIR /app
-COPY package*.json .
+COPY package*.json ./
 RUN npm install
-COPY server.js .
-EXPOSE 3001
+COPY . . 
+
+EXPOSE 3001 
+
 CMD ["npm", "start"]
