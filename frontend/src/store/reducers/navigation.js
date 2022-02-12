@@ -65,19 +65,19 @@ const slice = createSlice({
 		prevScreen: (navigation) => {
 			const { screens, current_screen } = navigation;
 			const rule = NavigationRules[current_screen];
-			const goNext = (screen) => {
+			const goPrev = (screen) => {
 				navigation.current_screen = screen;
 				navigation.transition_direction = 'ltr';
 			};
 
 			if (rule?.prev) {
-				goNext(rule.prev);
+				goPrev(rule.prev);
 			} else {
 				let index = screens.indexOf(current_screen);
 				if (index === -1) return;
 				// to prevent going bellow index 0.
 				if (--index >= 0) {
-					goNext(screens[index]);
+					goPrev(screens[index]);
 				}
 			}
 		},

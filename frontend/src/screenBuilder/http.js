@@ -4,7 +4,7 @@ const url = `http://${domain}:${port}`;
 
 export const fetchScreen = (screenId) => {
 	const headers = new Headers();
-	const requestUrl = `${url}/screen/${screenId}`;
+	const requestUrl = `${url}/api/screens/${screenId}`;
 	const request = new Request(requestUrl, {
 		headers,
 		method: 'GET',
@@ -12,18 +12,13 @@ export const fetchScreen = (screenId) => {
 		cache: 'default',
 	});
 
-	return fetch(request)
-		.then((response) => {
-			const { status } = response;
-
-			return response.json().then((res) => Promise.resolve({ ...res, status }));
-		})
-		.catch(() =>
-			Promise.resolve({
-				ok: false,
-				error: 'Boomslang Server Unreachable',
-			})
-		);
+	return fetch(request).then((response) => {
+		const { status, ok } = response;
+		if (status === 200 && ok) {
+			return response.json();
+		}
+		return Promise.reject(response);
+	});
 };
 
 export const postScreen = (screenId = 'test', content) => {

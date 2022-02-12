@@ -1,13 +1,16 @@
 import Screen from './Screen.jsx';
-import { fetchScreen } from 'src/screenBuilder/httpInterface.js';
-import isUndefined from 'lodash/isUndefined';
+import { fetchScreen } from 'src/screenBuilder/http.js';
 import { maintenanceMessageDisplayed } from 'src/store/reducers/settings.js';
 import React, { useEffect, useState } from 'react';
-import { SCREEN, SLIDER } from '../constants.js';
 import {
 	screenContentAdded,
 	screenContentInvalidated,
 } from 'src/store/reducers/navigation.js';
+import {
+	selectCurrentScreen,
+	selectInvalidScreens,
+	selectScreenContent,
+} from './utils.js';
 import { useDispatch, useSelector } from 'react-redux';
 
 let isScreen1 = true;
@@ -15,41 +18,24 @@ let isScreen1 = true;
 const Main = () => {
 	const dispatch = useDispatch();
 	const [sentRequests, updateSentRequests] = useState([]);
-	const [screenId, invalidScreens, contentIsLoaded] = useSelector(
-		({
-			navigation: {
-				current_screen: screenId,
-				invalid_screen_content: invalidScreens,
-				screen_content,
-			},
-		}) => [
-			screenId,
-			invalidScreens,
-			/* contentIsLoaded */
-			!screenId.length || !isUndefined(screen_content[screenId]),
-		]
-	);
+	const screenId = useSelector(selectCurrentScreen);
+	const invalidScreens = useSelector(selectInvalidScreens);
+	const screenContent = useSelector(selectScreenContent(screenId));
+
+	const contentIsLoaded = Boolean(screenContent);
 	const contentIsInvalid = invalidScreens.includes(screenId);
 	const requestIsSent = sentRequests.includes(screenId);
 
 	useEffect(() => {
-		if ((!contentIsLoaded || contentIsInvalid) && !requestIsSent) {
+		if (!requestIsSent && (!contentIsLoaded || contentIsInvalid)) {
 			updateSentRequests([...sentRequests, screenId]);
-			fetchScreen(screenId).then((response) => {
-				const { ok, content, error, status } = response;
-				updateSentRequests((requests) => {
-					const index = requests.indexOf(screenId);
-					if (index >= 0) {
-						requests.splice(index, 1);
-					}
-					return requests;
-				});
-				if (ok) {
+			fetchScreen(screenId)
+				.then((content) => {
 					dispatch(screenContentAdded({ screenId, content }));
-				} else {
-					console.error('Error:', error.name ?? error);
+				})
+				.catch((response) => {
+					const { status } = response;
 					switch (status) {
-					case 503:
 					case 404:
 						dispatch(
 							screenContentAdded({
@@ -64,17 +50,25 @@ const Main = () => {
 						dispatch(screenContentInvalidated(screenId));
 						break;
 					}
-				}
-			});
+				})
+				.finally(() => {
+					updateSentRequests((requests) => {
+						const index = requests.indexOf(screenId);
+						if (index >= 0) {
+							requests.splice(index, 1);
+						}
+						return requests;
+					});
+				});
 		}
 	}, [screenId]);
 
 	return (
-		<div className={SLIDER}>
+		<div className="slider">
 			<Screen
 				key={screenId}
 				screenId={screenId}
-				className={SCREEN}
+				className="slider__screen"
 				aria-hidden={!isScreen1}
 			/>
 		</div>

@@ -5,7 +5,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider as ReduxProvider } from 'react-redux';
 import defaultParser from 'src/screenBuilder/defaultParser.js';
-import store from './bootstrap.js';
+import store from './store.js';
 
 ReactDOM.render(
 	<ReduxProvider store={store}>

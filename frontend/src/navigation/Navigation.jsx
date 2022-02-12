@@ -1,7 +1,6 @@
 import './navigation.scss';
 import Footer from './components/Footer.jsx';
 import Main from './components/SimpleMain.jsx';
-import { HEADER, NAVIGATION } from './constants.js';
 import React, { useState } from 'react';
 
 const Navigation = () => {
@@ -9,8 +8,8 @@ const Navigation = () => {
 	const [footer] = useState(true);
 
 	return (
-		<div className={NAVIGATION}>
-			{header && <header className={HEADER} />}
+		<div className="navigation">
+			{header && <header className="navigation__header" />}
 			<Main />
 			{footer && <Footer />}
 		</div>

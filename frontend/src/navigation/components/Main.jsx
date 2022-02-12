@@ -1,10 +1,9 @@
 import Screen from './Screen.jsx';
-import { fetchScreen } from 'src/screenBuilder/httpInterface.js';
+import { fetchScreen } from 'src/screenBuilder/http.js';
 import gsap from 'gsap';
 import isUndefined from 'lodash/isUndefined';
 import { screenContentAdded } from 'src/store/reducers/navigation.js';
 import React, { useEffect, useRef, useState } from 'react';
-import { SCREEN, SCREEN_SECOND, SLIDER } from '../constants.js';
 import { useDispatch, useSelector } from 'react-redux';
 
 let animationSpeed = 0;
@@ -100,16 +99,16 @@ const Main = () => {
 	});
 
 	return (
-		<div className={SLIDER}>
+		<div className="slider">
 			<Screen
 				screenId={screen1Content}
-				className={SCREEN}
+				className="slider__screen"
 				ref={screen1}
 				aria-hidden={!isScreen1}
 			/>
 			<Screen
 				screenId={screen2Content}
-				className={SCREEN_SECOND}
+				className="slider__screen-next"
 				ref={screen2}
 				aria-hidden={isScreen1}
 			/>

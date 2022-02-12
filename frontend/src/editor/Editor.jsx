@@ -6,7 +6,7 @@ import ParserProvider from 'src/screenBuilder/ParserProvider.jsx';
 import classnames from 'classnames';
 import defaultParser from 'src/screenBuilder/defaultParser.js';
 import editorParser from 'src/screenBuilder/editorParser.js';
-import { postScreen } from 'src/screenBuilder/httpInterface.js';
+import { postScreen } from 'src/screenBuilder/http.js';
 import { useSelector } from 'react-redux';
 import React, { Suspense, useState } from 'react';
 const MaintenanceScreen = React.lazy(() => import('./MaintenanceScreen'));

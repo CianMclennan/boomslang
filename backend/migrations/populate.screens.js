@@ -1,39 +1,59 @@
+const defaultScreens = [
+	{
+		screen_id: "screen_1",
+		component: "Layout",
+		child: {
+			component: "Accordian",
+			data: [{
+				title: {
+					component: "Text",
+					text: "title text"
+				},
+				content: {
+					component: "Text",
+					text: "Main text"
+				}
+			}]
+		},
+	},
+	{
+		screen_id: "screen_2",
+		component: "Layout",
+		child: {
+			component: "Text",
+			text: "test 2"
+		},
+	},
+	{
+		screen_id: "screen_3",
+		component: "Layout",
+		child: {
+			component: "Accordian",
+			data: [{
+				title: {
+					component: "Text",
+					text: "title text"
+				},
+				content: {
+					component: "Text",
+					text: "Main text"
+				}
+			}]
+		},
+	},
+];
+
 module.exports = {
 	async up(db, client) {
-	  await db
+	  	await db
 		.collection("screens")
-		.insertMany([
-		  	{ 
-				screen_id: "screen_1",
-				component: "Layout",
-				child: {
-					component: "Text",
-					text: "test 1"
-				},
-			},
-		  	{ 
-				screen_id: "screen_2",
-				component: "Layout",
-				child: {
-					component: "Text",
-					text: "test 2"
-				},
-			},
-			{ 
-				screen_id: "screen_3",
-				component: "Layout",
-				child: {
-					component: "Text",
-					text: "test 3"
-				},
-			},
-		]);
+		.insertMany(defaultScreens);
 	},
   
 	async down(db, client) {
 	  await db.collection("screens").deleteMany({
 		screen_id: {
-		  $in: ["screen_1", "screen_2", "screen_3"],
+		  $in: defaultScreens.map(screen => screen.screen_id),
 		},
 	  });
 	},
